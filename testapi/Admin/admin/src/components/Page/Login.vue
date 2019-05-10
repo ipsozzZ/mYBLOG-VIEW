@@ -41,35 +41,31 @@
                 if (value === '') {
                     callback(new Error('请输入正确的用户名'));
                 } else {
-                    if (this.formCustom.repass !== '') {
-                        // 对第二个密码框单独验证
-                        this.$refs.formCustom.validateField('repass');
-                    }
                     callback();
                 }
             };
             const validatePassCheck = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('Please enter your password again'));
+                    callback(new Error('密码不能为空！'));
                 } else {
                     callback();
                 }
 						};
 						const validateRepassCheck = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('Please enter your password again'));
+                    callback(new Error('请再次输入密码！'));
                 } else if (value != this.formCustom.pass) {
-                    callback(new Error('The two input passwords do not match!'));
+                    callback(new Error('两次密码不一致！'));
                 } else {
                     callback();
                 }
             };
             const validateCode = (rule, value, callback) => {
                 if (!value) {
-                    return callback(new Error('Age cannot be empty'));
+                    return callback(new Error('验证码不能为空!'));
 								}
-								if (value === '') {
-                    callback(new Error('Please enter your code again'));
+								if (value != this.serverCode) {
+                    callback(new Error('验证码输入不正确!'));
                 } else {
                     callback();
                 }
@@ -77,7 +73,7 @@
             
             return {
 								pic: '',
-								serverCode: '1111',
+								serverCode: '',
                 formCustom: {
                     username: '',
 										pass: '',
@@ -110,13 +106,10 @@
 							that.getCode()
 							this.$refs[name].validate((valid) => {
                 if (valid) {
-										// this.$Message.success('Success!');
 									that.login(that.formCustom.username, that.formCustom.pass, function(res) {
 										if(res){
-											localStorage.setItem("m_user", that.formCustom.username)
-											// that.$Message.success("登陆成功！")
-											// console.log(localStorage.getItem("m_user"))
-                      // that.$router.push('/index')
+											that.$Message.success("登陆成功！")
+                      that.$router.push('/index')
 										}else{
 											that.$message.error("登录失败, 用户名或密码错误")
 										}
@@ -131,8 +124,11 @@
 							let admin = user // this.formCustom.username
 							let pwd  = pass // this.formCustom.pass
 							this.$api.AdminLogin(admin, pwd).then( res => {
-								console.log(res.data.data)
+								console.log(res.data.data.data.id)
+								let CurrId = res.data.data.data.id
 								 if(res.data.ret == 200){
+									 localStorage.setItem("m_user", this.formCustom.username)
+										localStorage.setItem("m_id", CurrId)
 									 cb(true)
 								 }else{
 									 cb(false)
@@ -142,7 +138,6 @@
 						getCode(){
 							const that = this
 							that.$api.getCode().then(res => {
-								console.log(res.data.data)
 								 if(res.data.ret == 200){
 									 console.log(res.data.data.data.code)
 									 that.pic = res.data.data.data.pic

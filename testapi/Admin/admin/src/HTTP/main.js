@@ -52,7 +52,7 @@ function Register(data) {
 }
 
 
-/* --------------  管理员操作  ---------------- */
+/* --------------  管理员操作begin  ---------------- */
 
 /**
  * 获取当前管理员信息
@@ -89,6 +89,62 @@ function AdminLogin(user, pass){
 	)
 }
 
+function AdminLogout(){
+	localStorage.removeItem('m_user');
+	localStorage.removeItem('m_id');
+	return true;
+}
+
+/**
+ * 删除管理员
+ */
+function deleteAdmin(Id){
+	let url = HOST_ROOT + '/?s=Admin.delete'
+	let CurrId = localStorage.getItem('m_id')
+	return axios(
+		{
+			method: 'post',
+			url: url,
+			data: {
+				Id: Id,
+				CurrId: CurrId,
+			}
+		}
+	)
+}
+
+/**
+ * 改变管理员权限
+ */
+function changeLimit(Id){
+	let url = HOST_ROOT + '/?s=Admin.giveLimit'
+	return axios(
+		{
+			method: 'post',
+			url: url,
+			data:{
+				Id: Id,
+				CurrId: localStorage.getItem('m_id'),
+			}
+		}
+	)
+}
+
+/**
+ * 添加管理员
+ */
+function addAdmin(data){
+	let url = HOST_ROOT + '/?s=Admin.add'
+	data.CurrId = localStorage.getItem('m_id');
+	return axios({
+		method: 'post',
+		url: url,
+		data: data,
+	})
+}
+
+/* --------------  管理员操作end  ---------------- */
+
 /**
  * 获取验证码
  * @returns
@@ -106,4 +162,8 @@ export default {
 	GetAdmins,
 	AdminLogin,
 	getCode,
+	deleteAdmin,
+	changeLimit,
+	addAdmin,
+	AdminLogout,
 }

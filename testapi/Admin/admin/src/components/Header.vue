@@ -27,10 +27,6 @@
                 <Icon type="ios-keypad"></Icon>
                 Item 2
             </MenuItem>
-            <MenuItem name="4">
-							<Icon type="md-contact"></Icon>
-                Item 4
-            </MenuItem>
         </div>
 				<Submenu name="1">
 								<template slot="title">
@@ -38,7 +34,7 @@
       						  {{ admin }}
       					</template>
 								<MenuItem name="1-1">我的资料</MenuItem>
-      					<MenuItem name="1-2">退出登录</MenuItem>
+      					<MenuItem name="1-2"><Button @click="logout()">退出登录</Button></MenuItem>
             </Submenu>
     </Menu>
 </Header>
@@ -54,11 +50,15 @@ export default {
 		}
 	},
 	created(){
-		this.admin = "ipso"
+		this.admin = localStorage.getItem('m_user')
 	},
 	methods: {
 		getAdmin(){
-			this.admin = "ipso"
+			this.admin = localStorage.getItem('m_user')
+		},
+		logout(){
+			this.$api.AdminLogout()
+			this.$router.push('/login')
 		}
 	},
 }

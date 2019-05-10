@@ -7,65 +7,161 @@
 
 <template>
     <div id="List">
-			<i-table border :content="self" :columns="columns7" :data="managers">
-
-			</i-table>
-    	<Page class="Page" :total="100"></Page>
+			<Button><router-link to="/Message/add">添加管理员</router-link></Button><br><br>
+			<!-- <Button type="primary">Primary</Button> -->
+			<i-table border :content="self" :columns="columns7" :data="managers"></i-table>
+    	<Page class="Page" :total="pageCount"></Page>
 		</div>
 
 </template>
 
 <script>
-    export default {
-			name: "List",
-      data () {
-        return {
-          self: this,
-          columns7: [
-              {
-                title: '账号',
-                key: 'id',
-              },
-              {
-                title: '账号',
-                key: 'account'
-              },
-              {
-                title: '操作',
-                // key: 'action',
-                width: 150,
-                align: 'center',
-                render (row, column, index) {
-                  return `<i-button type="primary" size="small" @click="show(${index})">查看</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;
-                }
-              }
-          ],
-          managers: []
-        }
-      },
-      methods: {
-        show (index) {
-            this.$Modal.info({
-                title: '用户信息',
-                content: `姓名：${this.managers[index].account}<br>年龄：${this.managers[index].account}`
-            })
+
+export default {
+	inject:["reload"],
+	name: "List",
+  data () {
+    return {
+			pageCount:20,
+      columns7: [
+        {
+          title: 'ID',
+          key: 'id',
+            
         },
-        remove (index) {
-            this.data6.splice(index, 1);
+        {
+          title: '账号',
+					key: 'account',
 				},
-				getAdmin(){
-					let that = this
-					this.$api.GetAdmins().then( res => {
-						this.managers = res.data.data.data
-						console.log(res.data.data.data)
-    			})
-				}
-			},
-			created() {
-    		this.getAdmin()
-			},
-			// mounted() {
-    	// 	this.getAdmin()
-			// }
+				{
+          title: '超级管理员',
+          key: 'limit',
+            
+        },
+        {
+          title: '操作',
+          key: 'action',
+          width: 200,
+          align: 'center',
+          render: (h, params) => {
+            return h('div', [
+              h('Button', {
+                props: {
+                  type: 'primary',
+                  size: 'small'
+                },
+                style: {
+                  marginRight: '5px'
+                },
+                on: {
+                  click: () => {
+                    this.show(params.index)
+                  }
+                }
+							}, '查看'),
+							h('Button', {
+                props: {
+                  type: 'primary',
+                  size: 'small'
+                },
+                style: {
+                  marginRight: '5px'
+                },
+                on: {
+                  click: () => {
+                    this.changeLimit(params.row.id)
+                  }
+                }
+              }, '编辑'),
+              h('Button', {
+                props: {
+                  type: 'error',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.remove(params.row.id)
+                  }
+                }
+              }, '删除')
+            ]);
+          }
+        }
+      ],
+      managers: [
+        {
+					id : 1,
+					account: 'ipso',
+					limit: 1,
+        },
+        {
+					id : 2,
+					account: 'test2',
+					limit: 1,
+        },
+        {
+					id : 3,
+					account: 'test3',
+					limit: 1,
+        },
+        {
+					id : 4,
+					account: 'test4',
+					limit: 1,
+        }
+      ]
     }
+  },
+  methods: {
+    show (index) {
+      this.$Modal.info({
+        title: 'User Info',
+        content: `account: ${this.managers[index].account}<br>id: ${this.managers[index].id}<br>limit: ${this.managers[index].limit}`
+      })
+		},
+		changeLimit(index) {
+			let that = this
+			that.$api.changeLimit(index).then(res => {
+				if(res.data.data == null){
+					that.$Message.error("失败！")
+				}
+				if(res.data.data.data.code == 0){
+					that.$Message.error(res.data.data.data.mag)
+				}
+				that.$Message.success("授权成功！")
+				// location.reload()
+				// this.reload();
+			})
+
+		},
+    remove (index) {
+			console.log(index)
+			// this.managers.splice(index, 1);
+			let that = this
+			that.$api.deleteAdmin(index).then(res => {
+				console.log(res)
+				if(res.data.data == null){
+					that.$Message.error("删除失败！")
+				}
+				if(res.data.data.data.code == 0){
+					that.$Message.error(res.data.data.data.mag)
+				}
+				that.$Message.success("删除成功！")
+			})
+		},
+		getAdmin(){
+			let that = this
+			this.$api.GetAdmins().then( res => {
+				this.managers = res.data.data.data
+				console.log(res.data.data.data)
+  		})
+		},
+	},
+	created() {
+		this.getAdmin()
+	},
+	mounted() {
+    this.reload();
+  }
+}
 </script>

@@ -7,7 +7,17 @@
 <script>
 
 export default {
-  name: 'App'
+	name: 'App',
+	methods: {
+		isLogin(){
+			if(!localStorage.getItem('m_user') || !localStorage.getItem('m_id')){
+				this.$router.push('/login')
+			}
+		}
+	},
+	created(){
+		this.isLogin();
+	},
 }
 </script>
 
