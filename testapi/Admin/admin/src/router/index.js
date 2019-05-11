@@ -30,6 +30,10 @@ export default new Router({
 					component: resolve => require(["../components/Message/add.vue"], resolve)
 				},
 				{
+					path: "/Message/info",
+					component: resolve => require(["../components/Message/info.vue"], resolve)
+				},
+				{
 					path: "/User/List",
 					component: resolve => require(["../components/User/list.vue"], resolve)
 				},

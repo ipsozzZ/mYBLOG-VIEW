@@ -33,7 +33,7 @@
       						  <Icon type="ios-navigate"></Icon>
       						  {{ admin }}
       					</template>
-								<MenuItem name="1-1">我的资料</MenuItem>
+								<MenuItem name="1-1"><Button @click="getMyInfo()">我的资料</Button></MenuItem>
       					<MenuItem name="1-2"><Button @click="logout()">退出登录</Button></MenuItem>
             </Submenu>
     </Menu>
@@ -50,16 +50,22 @@ export default {
 		}
 	},
 	created(){
-		this.admin = localStorage.getItem('m_user')
+		this.admin = this.$commonjs.getCache('m_user') // localStorage.getItem('m_user')
+		// this.admin = this.$api.getCache
 	},
 	methods: {
 		getAdmin(){
-			this.admin = localStorage.getItem('m_user')
+			this.admin = this.$commonjs.getCache('m_user') // localStorage.getItem('m_user')
 		},
 		logout(){
 			this.$api.AdminLogout()
 			this.$router.push('/login')
-		}
+		},
+		getMyInfo(){
+			let that = this
+			that.$router.push('/Message/info')
+
+		},
 	},
 }
 </script>

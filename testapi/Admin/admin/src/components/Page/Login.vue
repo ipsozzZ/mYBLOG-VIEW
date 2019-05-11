@@ -127,8 +127,9 @@
 								console.log(res.data.data.data.id)
 								let CurrId = res.data.data.data.id
 								 if(res.data.ret == 200){
-									 localStorage.setItem("m_user", this.formCustom.username)
-										localStorage.setItem("m_id", CurrId)
+									//  localStorage.setItem("m_user", this.formCustom.username)
+									 this.$commonjs.setCache("m_user", this.formCustom.username)
+									 this.$commonjs.setCache("m_id", CurrId)
 									 cb(true)
 								 }else{
 									 cb(false)

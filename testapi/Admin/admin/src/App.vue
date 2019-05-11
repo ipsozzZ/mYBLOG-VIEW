@@ -10,7 +10,7 @@ export default {
 	name: 'App',
 	methods: {
 		isLogin(){
-			if(!localStorage.getItem('m_user') || !localStorage.getItem('m_id')){
+			if(!this.$commonjs.getCache('m_user') || !this.$commonjs.getCache('m_id')){
 				this.$router.push('/login')
 			}
 		}

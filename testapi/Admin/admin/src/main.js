@@ -6,14 +6,16 @@ import router from './router'
 import iView from 'iview'
 import Axios from 'axios'
 import api from './HTTP/main'
-import { Alert, Icon, Button, Modal, Tree, Message, } from 'iview'
+// import { Alert, Icon, Button, Modal, Tree, Message, } from 'iview'
 import 'iview/dist/styles/iview.css'
+import commonjs from './HTTP/common'
 
 Vue.config.productionTip = false
 Vue.use(iView) 
 Vue.prototype.$axios = Axios
 Vue.prototype.HOST = '/api'
 Vue.prototype.$api = api
+Vue.prototype.$commonjs = commonjs
 Vue.prototype.$Message = Message
 
 /* 允许提交表单形式的数据到接口 */

@@ -4,6 +4,7 @@
  */
 
 import axios from 'axios'
+import common from './common'
 
 /* 无需跨域时将此处注释代码取消注释 */
 // let URL = 'http://www.host.com'
@@ -89,9 +90,12 @@ function AdminLogin(user, pass){
 	)
 }
 
+/**
+ * 管理员退出登录
+ */
 function AdminLogout(){
-	localStorage.removeItem('m_user');
-	localStorage.removeItem('m_id');
+	common.removeCache('m_user');
+	common.removeCache('m_id');
 	return true;
 }
 
@@ -100,7 +104,7 @@ function AdminLogout(){
  */
 function deleteAdmin(Id){
 	let url = HOST_ROOT + '/?s=Admin.delete'
-	let CurrId = localStorage.getItem('m_id')
+	let CurrId = common.getCache('m_id')
 	return axios(
 		{
 			method: 'post',
@@ -124,7 +128,7 @@ function changeLimit(Id){
 			url: url,
 			data:{
 				Id: Id,
-				CurrId: localStorage.getItem('m_id'),
+				CurrId: common.getCache('m_id'),
 			}
 		}
 	)
@@ -135,7 +139,7 @@ function changeLimit(Id){
  */
 function addAdmin(data){
 	let url = HOST_ROOT + '/?s=Admin.add'
-	data.CurrId = localStorage.getItem('m_id');
+	data.CurrId = common.getCache('m_id');
 	return axios({
 		method: 'post',
 		url: url,
