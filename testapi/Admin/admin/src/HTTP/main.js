@@ -147,6 +147,19 @@ function addAdmin(data){
 	})
 }
 
+/**
+ * 修改管理员账号
+ */
+function editAdmin(data){
+	let url = HOST_ROOT + '/?s=Admin.update'
+	data.CurrId = common.getCache('m_id');
+	return axios({
+		method: 'post',
+		url: url,
+		data: data,
+	})
+}
+
 /* --------------  管理员操作end  ---------------- */
 
 /**
@@ -170,4 +183,5 @@ export default {
 	changeLimit,
 	addAdmin,
 	AdminLogout,
+	editAdmin,
 }

@@ -6,7 +6,7 @@ import router from './router'
 import iView from 'iview'
 import Axios from 'axios'
 import api from './HTTP/main'
-// import { Alert, Icon, Button, Modal, Tree, Message, } from 'iview'
+import { Alert, Icon, Button, Modal, Tree, Message, Loader } from 'iview'
 import 'iview/dist/styles/iview.css'
 import commonjs from './HTTP/common'
 
@@ -24,8 +24,10 @@ Vue.prototype.$Message = Message
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+	mode: 'history',
+	el: '#app',
   router,
   components: { App },
   template: '<App/>'
 })
+

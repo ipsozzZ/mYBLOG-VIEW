@@ -129,6 +129,7 @@ export default {
 					that.$Message.error(res.data.data.data.mag)
 				}
 				that.$Message.success("授权成功！")
+				this.$router.push('/Message/List')
 				// location.reload()
 				// this.reload();
 			})
@@ -143,10 +144,13 @@ export default {
 				if(res.data.data == null){
 					that.$Message.error("删除失败！")
 				}
-				if(res.data.data.data.code == 0){
-					that.$Message.error(res.data.data.data.mag)
+				if(res.data.data.code == 0){
+					that.$Message.error(res.data.data.msg)
+				}else{
+					that.$Message.success("删除成功！")
+					this.$router.push('/Message/List')
 				}
-				that.$Message.success("删除成功！")
+				
 			})
 		},
 		getAdmin(){

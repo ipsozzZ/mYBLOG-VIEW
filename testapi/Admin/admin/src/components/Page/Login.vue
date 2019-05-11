@@ -126,9 +126,10 @@
 							this.$api.AdminLogin(admin, pwd).then( res => {
 								console.log(res.data.data.data.id)
 								let CurrId = res.data.data.data.id
+								let CurrUsername = res.data.data.data.account
 								 if(res.data.ret == 200){
 									//  localStorage.setItem("m_user", this.formCustom.username)
-									 this.$commonjs.setCache("m_user", this.formCustom.username)
+									 this.$commonjs.setCache("m_user", CurrUsername)
 									 this.$commonjs.setCache("m_id", CurrId)
 									 cb(true)
 								 }else{

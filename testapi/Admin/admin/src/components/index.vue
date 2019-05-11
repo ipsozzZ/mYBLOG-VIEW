@@ -117,7 +117,7 @@ body{
 			data(){
 				return {
 					currTemplate: "CommonFooter",
-					Home: '',
+					Home: 'ipso',
 				}
 			},
 			components:{

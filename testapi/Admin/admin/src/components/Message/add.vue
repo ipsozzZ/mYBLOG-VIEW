@@ -8,6 +8,7 @@ Form{
 
 <template>
 	<div class="Add">
+		<h2>添加管理员</h2><br>
 		<Form ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="80">
         <FormItem label="账号" prop="account">
             <Input type="text" v-model="formCustom.Account"></Input>
@@ -40,7 +41,9 @@ Form{
             const validatePass = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请输入你的密码！'));
-                } else {
+                } else if(value.length < 4){
+									callback(new Error('密码长度必须大于等于4位！'));
+								} else {
                     if (this.formCustom.PassCheck !== '') {
                         // 对第二个密码框单独验证
                         this.$refs.formCustom.validateField('PassCheck');
@@ -102,11 +105,11 @@ Form{
                 this.$refs[name].validate((valid) => {
                     if (valid) {
 											this.$api.addAdmin(this.formCustom).then(res => {
-												console.log(res)
 												if(res.data.data.code == 0){
 													this.$Message.error(res.data.data.msg);
 												}else{
 													this.$Message.success(res.data.data.msg);
+													this.$router.push('/Message/List')
 												}
 											})
                     } else {

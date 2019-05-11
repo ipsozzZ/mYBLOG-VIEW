@@ -1,9 +1,18 @@
+
+/**
+ * 路由管理
+ * @author ipso
+ */
+
+
 import Vue from 'vue'
 import Router from 'vue-router'
+import common from '../HTTP/common'
 
 Vue.use(Router)
 
-export default new Router({
+/* 路由规则 */
+let router = new Router({
   routes: [
     {
       path: '/',
@@ -16,6 +25,9 @@ export default new Router({
 		{
 			path: "/index",
 			component: resolve => require(["../components/index.vue"],resolve),
+			meta: {
+				requireAuth: true
+			},
 			children:[
 				{
 					path: "/HomeCard",
@@ -34,6 +46,10 @@ export default new Router({
 					component: resolve => require(["../components/Message/info.vue"], resolve)
 				},
 				{
+					path: "/Message/edit",
+					component: resolve => require(["../components/Message/edit.vue"], resolve)
+				},
+				{
 					path: "/User/List",
 					component: resolve => require(["../components/User/list.vue"], resolve)
 				},
@@ -46,3 +62,23 @@ export default new Router({
 		
   ]
 })
+
+/**
+ * 路由拦截登录
+ */
+router.beforeEach((to, from, next) => {
+	if (to.matched.some(res => res.meta.requireAuth)){ // 判断是否需要登录权限
+		if (common.getCache('m_user') && common.getCache('m_id')){
+			next()
+		}else{
+			next({
+				path: '/login',
+				query: {redirect: to.fullPath}
+			})
+		}
+	}else{
+		next()
+	}
+})
+
+export default router

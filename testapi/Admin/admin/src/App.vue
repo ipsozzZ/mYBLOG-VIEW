@@ -13,6 +13,7 @@ export default {
 			if(!this.$commonjs.getCache('m_user') || !this.$commonjs.getCache('m_id')){
 				this.$router.push('/login')
 			}
+			this.$router.push('/index')
 		}
 	},
 	created(){
