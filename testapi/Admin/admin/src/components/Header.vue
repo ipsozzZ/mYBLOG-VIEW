@@ -30,7 +30,7 @@
         </div>
 				<Submenu name="1">
 								<template slot="title">
-      						  <Icon type="ios-navigate"></Icon>
+      						  <Icon type="md-person"></Icon>
       						  {{ admin }}
       					</template>
 								<MenuItem name="1-1"><Button @click="getMyInfo()">我的资料</Button></MenuItem>

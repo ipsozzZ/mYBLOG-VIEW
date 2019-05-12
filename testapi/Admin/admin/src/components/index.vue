@@ -45,16 +45,16 @@ body{
       						          <Icon type="ios-keypad"></Icon>
       						          用户管理
       						      </template>
-      						      <MenuItem name="2-1"> <router-link to="/src/components/User/list">用户列表</router-link> </MenuItem>
-      						      <MenuItem name="2-2"> <router-link to="/src/components/User/add">添加用户</router-link> </MenuItem>
+      						      <MenuItem name="2-1"> <router-link to="/User/list">用户列表</router-link> </MenuItem>
+      						      <MenuItem name="2-2"> <router-link to="/User/add">添加用户</router-link> </MenuItem>
       						  </Submenu>
       						  <Submenu name="3">
       						      <template slot="title">
       						          <Icon type="ios-cafe" />
       						          文章管理
       						      </template>
-      						      <MenuItem name="3-1"><router-link to="/src/components/Article/list">文章列表</router-link></MenuItem>
-      						      <MenuItem name="3-2"><router-link to="/src/components/Article/add">添加文章</router-link></MenuItem>
+      						      <MenuItem name="3-1"><router-link to="/Article/list">文章列表</router-link></MenuItem>
+      						      <MenuItem name="3-2"><router-link to="/Article/add">添加文章</router-link></MenuItem>
       						  </Submenu>
 
 										<Submenu name="4">
@@ -62,16 +62,16 @@ body{
       						          <Icon type="ios-cafe" />
       						          互动管理
       						      </template>
-      						      <MenuItem name="4-1"><router-link to="/src/components/Comment/list">互动列表</router-link></MenuItem>
-      						      <MenuItem name="4-2"><router-link to="/src/components/Comment/add">回复互动</router-link></MenuItem>
+      						      <MenuItem name="4-1"><router-link to="/Comment/list">互动列表</router-link></MenuItem>
+      						      <MenuItem name="4-2"><router-link to="/Comment/add">回复互动</router-link></MenuItem>
       						  </Submenu>
 										<Submenu name="5">
       						      <template slot="title">
       						          <Icon type="ios-cafe" />
       						          栏目管理
       						      </template>
-      						      <MenuItem name="5-1"><router-link to="/src/components/Category/list">栏目列表</router-link></MenuItem>
-      						      <MenuItem name="5-2"><router-link to="/src/components/Category/add">添加栏目</router-link></MenuItem>
+      						      <MenuItem name="5-1"><router-link to="/Category/list">栏目列表</router-link></MenuItem>
+      						      <MenuItem name="5-2"><router-link to="/Category/add">添加栏目</router-link></MenuItem>
       						  </Submenu>
 										<MenuItem>
       						      <Icon type="ios-folder" />
@@ -95,7 +95,8 @@ body{
 
 								<!-- content -->
         				<Content :style="{padding: '24px', minHeight: '480px', background: '#fff'}">
-            			<transition name="move" mode="out-in"><router-view></router-view></transition>
+            			<transition name="move" mode="out-in"><router-view>
+									</router-view></transition>
         				</Content>
 								<!-- end -->
 

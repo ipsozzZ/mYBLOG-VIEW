@@ -54,8 +54,16 @@ let router = new Router({
 					component: resolve => require(["../components/User/list.vue"], resolve)
 				},
 				{
-					path: "/User/Add",
+					path: "/User/add",
 					component: resolve => require(["../components/User/add.vue"], resolve)
+				},
+				{
+					path: "/Article/list",
+					component: resolve => require(["../components/Article/list.vue"], resolve)
+				},
+				{
+					path: "/Article/add",
+					component: resolve => require(["../components/Article/add.vue"], resolve)
 				},
 			]
 		},
