@@ -9,6 +9,8 @@ import api from './HTTP/main'
 import { Alert, Icon, Button, Modal, Tree, Message, Loader } from 'iview'
 import 'iview/dist/styles/iview.css'
 import commonjs from './HTTP/common'
+import VueSimplemde from 'vue-simplemde'
+import 'simplemde/dist/simplemde.min.css'
 
 Vue.config.productionTip = false
 Vue.use(iView) 
@@ -17,6 +19,7 @@ Vue.prototype.HOST = '/api'
 Vue.prototype.$api = api
 Vue.prototype.$commonjs = commonjs
 Vue.prototype.$Message = Message
+Vue.use(VueSimplemde)
 
 /* 允许提交表单形式的数据到接口 */
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';

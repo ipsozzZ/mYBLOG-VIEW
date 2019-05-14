@@ -18,9 +18,6 @@
         <FormItem label="密码" prop="pass">
             <Input type="password" v-model="formCustom.pass"></Input>
         </FormItem>
-				<FormItem label="再次输入密码" prop="repass">
-            <Input type="password" v-model="formCustom.repass"></Input>
-        </FormItem>
         <FormItem label="验证码" inline = true prop="code">
             <Input type="text" v-model="formCustom.code"></Input>
 						<img :src="pic" @click="getCode()" class="avatar">						
@@ -77,7 +74,6 @@
                 formCustom: {
                     username: '',
 										pass: '',
-										repass: '',
                     code: ''
                 },
                 ruleCustom: {
@@ -87,9 +83,6 @@
                     pass: [
                         { validator: validatePassCheck, trigger: 'blur' }
 										],
-										repass: [
-                        { validator: validateRepassCheck, trigger: 'blur' }
-                    ],
                     code: [
                         { validator: validateCode, trigger: 'blur' }
                     ]

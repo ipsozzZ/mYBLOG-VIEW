@@ -1,50 +1,45 @@
 <template>
     <div class="Add">
 			<Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-        <FormItem label="Name" prop="name">
-            <Input v-model="formValidate.name" placeholder="Enter your name"></Input>
+        <FormItem label="文章标题" prop="title">
+            <Input v-model="formValidate.title" placeholder="输入文章标题"></Input>
         </FormItem>
-        <FormItem label="E-mail" prop="mail">
-            <Input v-model="formValidate.mail" placeholder="Enter your e-mail"></Input>
+        <FormItem label="作者" prop="author">
+            <Input v-model="formValidate.author" placeholder="输入作者"></Input>
         </FormItem>
-        <FormItem label="City" prop="city">
-            <Select v-model="formValidate.city" placeholder="Select your city">
-                <Option value="beijing">New York</Option>
-                <Option value="shanghai">London</Option>
-                <Option value="shenzhen">Sydney</Option>
+				<FormItem label="关键字" prop="keywords">
+            <Input v-model="formValidate.keywords" placeholder="输入关键字"></Input>
+        </FormItem>
+				<FormItem label="描述" prop="desc">
+            <Input v-model="formValidate.desc" placeholder="输入文章描述"></Input>
+        </FormItem>
+				<FormItem label="获赞数" prop="like">
+            <Input v-model="formValidate.like" disabled placeholder="文章获赞数"></Input>
+        </FormItem>
+				<FormItem label="评论数" prop="comments">
+            <Input v-model="formValidate.comments" disabled placeholder="文章获评论数"></Input>
+        </FormItem>
+        <FormItem label="文章分类" prop="cate">
+            <Select v-model="formValidate.cate" placeholder="选择你的文章分类">
+                <Option value="PHP">PHP</Option>
+                <Option value="Javascript">Javascript</Option>
+                <Option value="nodejs">nodejs</Option>
             </Select>
         </FormItem>
-        <FormItem label="Date">
-            <Row>
-                <Col span="11">
-                    <FormItem prop="date">
-                        <DatePicker type="date" placeholder="Select date" v-model="formValidate.date"></DatePicker>
-                    </FormItem>
-                </Col>
-                <Col span="2" style="text-align: center">-</Col>
-                <Col span="11">
-                    <FormItem prop="time">
-                        <TimePicker type="time" placeholder="Select time" v-model="formValidate.time"></TimePicker>
-                    </FormItem>
-                </Col>
-            </Row>
+        <FormItem label="封面">
+            <Upload multiple v-model="formValidate.face" action="//jsonplaceholder.typicode.com/posts/">
+        			<Button icon="ios-cloud-upload-outline">Upload files</Button>
+    				</Upload>
         </FormItem>
-        <FormItem label="Gender" prop="gender">
-            <RadioGroup v-model="formValidate.gender">
-                <Radio label="male">Male</Radio>
-                <Radio label="female">Female</Radio>
+        <FormItem label="是否置顶" prop="istop">
+            <RadioGroup v-model="formValidate.istop">
+                <Radio label="0">不置顶</Radio>
+                <Radio label="1">置顶</Radio>
             </RadioGroup>
         </FormItem>
-        <FormItem label="Hobby" prop="interest">
-            <CheckboxGroup v-model="formValidate.interest">
-                <Checkbox label="Eat"></Checkbox>
-                <Checkbox label="Sleep"></Checkbox>
-                <Checkbox label="Run"></Checkbox>
-                <Checkbox label="Movie"></Checkbox>
-            </CheckboxGroup>
-        </FormItem>
-        <FormItem label="Desc" prop="desc">
-            <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+        <FormItem label="文章内容" prop="content">
+            <!-- <Input v-model="formValidate.content" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="写点什么..."></Input> -->
+						<markdown-editor v-model="formValidate.content" ref="markdownEditor"></markdown-editor>
         </FormItem>
         <FormItem>
             <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
@@ -54,55 +49,48 @@
 		</div>
 </template>
 <script>
+		import markdownEditor from 'vue-simplemde/src/markdown-editor'
+		import VueMarkdown from 'vue-markdown'
     export default {
 				name: 'add',
+				components: {
+					markdownEditor,
+					VueMarkdown
+    		},
         data () {
             return {
+								cate: [],
                 formValidate: {
-                    name: '',
-                    mail: '',
-                    city: '',
-                    gender: '',
-                    interest: [],
-                    date: '',
-                    time: '',
-                    desc: ''
+                  title: '',
+									author: '',
+									keywords: '',
+									desc: '',
+                  cate: '',
+                  istop: '',
+									like: 0,
+									comments: 0,
+                  face: '',
+                  content: ''
                 },
                 ruleValidate: {
-                    name: [
-                        { required: true, message: 'The name cannot be empty', trigger: 'blur' }
+                    title: [
+                        { required: true, message: '文章标题不能为空', trigger: 'blur' }
                     ],
-                    mail: [
-                        { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
-                        { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
+                    author: [
+                        { required: true, message: '文章作者不能为空', trigger: 'blur' },
                     ],
-                    city: [
-                        { required: true, message: 'Please select the city', trigger: 'change' }
+                    keywords: [
+                        { required: true, message: '文章关键字不能为空', trigger: 'change' }
                     ],
-                    gender: [
-                        { required: true, message: 'Please select gender', trigger: 'change' }
-                    ],
-                    interest: [
-                        { required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change' },
-                        { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
-                    ],
-                    date: [
-                        { required: true, type: 'date', message: 'Please select the date', trigger: 'change' }
-                    ],
-                    time: [
-                        { required: true, type: 'string', message: 'Please select time', trigger: 'change' }
-                    ],
-                    desc: [
-                        { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
-                        { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
-                    ]
+                    
                 }
             }
-        },
+				},
         methods: {
             handleSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
+											console.log(this.formValidate)
                         this.$Message.success('Success!');
                     } else {
                         this.$Message.error('Fail!');
