@@ -13,6 +13,7 @@ Vue.use(Router)
 
 /* 路由规则 */
 let router = new Router({
+
   routes: [
     {
       path: '/',

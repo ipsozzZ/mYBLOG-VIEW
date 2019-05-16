@@ -1,41 +1,41 @@
 <template>
     <div class="Add">
 			<Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-        <FormItem label="文章标题" prop="title">
+        <FormItem label="文章标题">
             <Input v-model="formValidate.title" placeholder="输入文章标题"></Input>
         </FormItem>
-        <FormItem label="作者" prop="author">
+        <FormItem label="作者">
             <Input v-model="formValidate.author" disabled placeholder="输入作者"></Input>
         </FormItem>
-				<FormItem label="关键字" prop="keywords">
+				<FormItem label="关键字">
             <Input v-model="formValidate.keywords" placeholder="输入关键字"></Input>
         </FormItem>
-				<FormItem label="描述" prop="desc">
+				<FormItem label="描述">
             <Input v-model="formValidate.desc" placeholder="输入文章描述"></Input>
         </FormItem>
-				<FormItem label="获赞数" prop="like">
+				<FormItem label="获赞数">
             <Input v-model="formValidate.like" disabled placeholder="文章获赞数"></Input>
         </FormItem>
-				<FormItem label="评论数" prop="comments">
+				<FormItem label="评论数">
             <Input v-model="formValidate.comments" disabled placeholder="文章获评论数"></Input>
         </FormItem>
-				<FormItem label="文章状态" prop="comments">
+				<FormItem label="文章状态">
             <Input v-model="formValidate.state" disabled placeholder="未发布"></Input>
         </FormItem>
-        <FormItem label="文章分类" prop="cate">
+        <FormItem label="文章分类">
             <Select v-model="formValidate.cate" placeholder="选择你的文章分类">
                 <Option value="1">PHP</Option>
                 <Option value="2">Javascript</Option>
                 <Option value="3">nodejs</Option>
             </Select>
         </FormItem>
-        <FormItem label="是否置顶" prop="istop">
+        <FormItem label="是否置顶">
             <RadioGroup v-model="formValidate.istop">
                 <Radio label="0">不置顶</Radio>
                 <Radio label="1">置顶</Radio>
             </RadioGroup>
         </FormItem>
-        <FormItem label="文章内容" prop="content">
+        <FormItem label="文章内容">
             <!-- <Input v-model="formValidate.content" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="写点什么..."></Input> -->
 						<markdown-editor v-model="formValidate.content" ref="markdownEditor"></markdown-editor>
         </FormItem>
@@ -44,7 +44,7 @@
             <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
         </FormItem>
 
-				<FormItem label="是否置顶" prop="istop">
+				<FormItem label="是否置顶">
             <vue-markdown v-model="formValidate.content">{{ formValidate.content }}</vue-markdown>
         </FormItem>
     </Form>

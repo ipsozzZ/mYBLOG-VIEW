@@ -15,17 +15,23 @@
 		<p>文章状态：{{ article.state }}</p>
 		<p>文章最近修改时间：{{ article.rtime }}</p>
 		<p>文章创建时间：{{ article.ctime }}</p>
-		<p>文章内容：<br><vue-markdown v-model="article.content">{{ article.content }}</vue-markdown></p>
+		<p>文章内容：<br>
+			<markdown :content="article.content"></markdown>
+			<!-- <article>
+				{{article.content}}
+			</article> -->
+
+		</p>
 	</div>
 </template>
 
 <script>
 import markdownEditor from 'vue-simplemde/src/markdown-editor'
-import VueMarkdown from 'vue-markdown'
+import markdown from '../Page/Markdown'
 export default {
 	name: "Show",
 	components: {
-		VueMarkdown,
+		markdown,
 		markdownEditor
 	},
 	data(){
