@@ -5,7 +5,7 @@
             <Input v-model="formValidate.title" placeholder="输入文章标题"></Input>
         </FormItem>
         <FormItem label="作者" prop="author">
-            <Input v-model="formValidate.author" placeholder="输入作者"></Input>
+            <Input v-model="formValidate.author" disabled placeholder="输入作者"></Input>
         </FormItem>
 				<FormItem label="关键字" prop="keywords">
             <Input v-model="formValidate.keywords" placeholder="输入关键字"></Input>
@@ -19,17 +19,15 @@
 				<FormItem label="评论数" prop="comments">
             <Input v-model="formValidate.comments" disabled placeholder="文章获评论数"></Input>
         </FormItem>
+				<FormItem label="文章状态" prop="comments">
+            <Input v-model="formValidate.state" disabled placeholder="未发布"></Input>
+        </FormItem>
         <FormItem label="文章分类" prop="cate">
             <Select v-model="formValidate.cate" placeholder="选择你的文章分类">
-                <Option value="PHP">PHP</Option>
-                <Option value="Javascript">Javascript</Option>
-                <Option value="nodejs">nodejs</Option>
+                <Option value="1">PHP</Option>
+                <Option value="2">Javascript</Option>
+                <Option value="3">nodejs</Option>
             </Select>
-        </FormItem>
-        <FormItem label="封面">
-            <Upload multiple v-model="formValidate.face" action="//jsonplaceholder.typicode.com/posts/">
-        			<Button icon="ios-cloud-upload-outline">Upload files</Button>
-    				</Upload>
         </FormItem>
         <FormItem label="是否置顶" prop="istop">
             <RadioGroup v-model="formValidate.istop">
@@ -42,8 +40,12 @@
 						<markdown-editor v-model="formValidate.content" ref="markdownEditor"></markdown-editor>
         </FormItem>
         <FormItem>
-            <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
-            <Button @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
+            <Button type="primary" @click="handleSubmit('formValidate')">添加</Button>
+            <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+        </FormItem>
+
+				<FormItem label="是否置顶" prop="istop">
+            <vue-markdown v-model="formValidate.content">{{ formValidate.content }}</vue-markdown>
         </FormItem>
     </Form>
 		</div>
@@ -56,10 +58,14 @@
 				components: {
 					markdownEditor,
 					VueMarkdown
-    		},
+				},
+				created() {
+					this.formValidate.author = this.$commonjs.getCache('m_user')
+				},
         data () {
             return {
 								cate: [],
+								loadingStatus: false,
                 formValidate: {
                   title: '',
 									author: '',
@@ -69,7 +75,8 @@
                   istop: '',
 									like: 0,
 									comments: 0,
-                  face: '',
+									face: '',
+									state: 0,
                   content: ''
                 },
                 ruleValidate: {
@@ -91,7 +98,19 @@
                 this.$refs[name].validate((valid) => {
                     if (valid) {
 											console.log(this.formValidate)
-                        this.$Message.success('Success!');
+											let that = this
+											that.$api.addArticle(that.formValidate).then( res => {
+												console.log(res)
+												if(res.data.ret != 200){
+													that.$Message.error('添加失败！');
+												}else{
+													if(res.data.data.code != 1){
+														that.$Message.error(res.data.data.msg);
+													}
+													that.$Message.success(res.data.data.msg);
+													that.$router.push('/Article/list')
+												}
+											})
                     } else {
                         this.$Message.error('Fail!');
                     }
@@ -99,7 +118,7 @@
             },
             handleReset (name) {
                 this.$refs[name].resetFields();
-            }
+						},
         }
     }
 </script>

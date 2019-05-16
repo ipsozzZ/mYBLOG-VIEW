@@ -10,7 +10,7 @@
 			<Button><router-link to="/Article/add">添加文章</router-link></Button><br><br>
 			<!-- <Button type="primary">Primary</Button> -->
 			<i-table border :content="self" :columns="columns7" :data="managers"></i-table>
-    	<Page class="Page" :total="pageCount"></Page>
+    	<Page class="Page" :total="pageCount" :page-size="num" show-total :current="currpage" @on-change="handlePage"></Page>
 		</div>
 
 </template>
@@ -20,24 +20,46 @@
 export default {
 	inject:["reload"],
 	name: "List",
+	created() {
+		this.getCount()
+		this.getArticle(this.currpage, this.num)
+		// this.num = this.$commonjs.getPageNum()
+	},
   data () {
     return {
-			pageCount:20,
+			pageCount: "",
+			num: 10,
+			currpage: 1,
       columns7: [
         {
-          title: 'ID',
+          title: '文章编号',
           key: 'id',
             
         },
         {
-          title: '账号',
-					key: 'account',
+          title: '文章标题',
+					key: 'title',
 				},
 				{
-          title: '超级管理员',
-          key: 'limit',
+          title: '文章作者',
+          key: 'author',
             
-        },
+				},
+				{
+          title: '文章分类',
+          key: 'cate',
+            
+				},
+				{
+          title: '文章是否置顶',
+          key: 'istop',
+            
+				},
+				{
+          title: '文章状态',
+          key: 'state',
+            
+				},
         {
           title: '操作',
           key: 'action',
@@ -55,10 +77,11 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.show(params.index)
+										// this.show(params.index)
+										this.$router.push("/Article/show/"+params.row.id)
                   }
                 }
-							}, '查看'),
+							}, '详情'),
 							h('Button', {
                 props: {
                   type: 'primary',
@@ -91,24 +114,20 @@ export default {
       managers: [
         {
 					id : 1,
-					account: 'ipso',
-					limit: 1,
+					title: '',
+					author: '',
+					cate: '',
+					istop: 0,
+					desc: '',
+					keywords: '',
+					like: '',
+					comments: '',
+					face: '',
+					state: '',
+					content: '',
+					rtime: 0,
+					ctime: 0,
         },
-        {
-					id : 2,
-					account: 'test2',
-					limit: 1,
-        },
-        {
-					id : 3,
-					account: 'test3',
-					limit: 1,
-        },
-        {
-					id : 4,
-					account: 'test4',
-					limit: 1,
-        }
       ]
     }
   },
@@ -119,27 +138,11 @@ export default {
         content: `account: ${this.managers[index].account}<br>id: ${this.managers[index].id}<br>limit: ${this.managers[index].limit}`
       })
 		},
-		changeLimit(index) {
-			let that = this
-			that.$api.changeLimit(index).then(res => {
-				if(res.data.data == null){
-					that.$Message.error("失败！")
-				}
-				if(res.data.data.data.code == 0){
-					that.$Message.error(res.data.data.data.mag)
-				}
-				that.$Message.success("授权成功！")
-				this.$router.push('/Message/List')
-				// location.reload()
-				// this.reload();
-			})
-
-		},
     remove (index) {
 			console.log(index)
 			// this.managers.splice(index, 1);
 			let that = this
-			that.$api.deleteAdmin(index).then(res => {
+			that.$api.deleteArticle(index).then(res => {
 				console.log(res)
 				if(res.data.data == null){
 					that.$Message.error("删除失败！")
@@ -148,24 +151,45 @@ export default {
 					that.$Message.error(res.data.data.msg)
 				}else{
 					that.$Message.success("删除成功！")
-					this.$router.push('/Message/List')
+					that.managers.splice(index, 1);
+					that.$router.push('/Article/List')
 				}
 				
 			})
 		},
-		getAdmin(){
+		getArticle(currpage,num){
 			let that = this
-			this.$api.GetAdmins().then( res => {
-				this.managers = res.data.data.data
-				console.log(res.data.data.data)
+			that.$api.listArticle(currpage, num).then( res => {
+				if(res.data.ret != 200){
+					that.$Message.success("获取数据失败！")
+					that.managers = null
+				}else{
+					if(res.data.data.code == 0){
+						that.$Message.success(res.data.data.msg)
+						that.managers = null
+					}
+					else{
+						that.managers = res.data.data.data
+					}
+				}
   		})
 		},
+		getCount(){
+			let that = this
+			that.$api.countArticle().then( res => {
+				if(res.data.ret != 200){
+					that.pageCount = 0
+				}
+				else{
+					that.pageCount = parseInt(res.data.data.data)
+				}
+			})
+		},
+		handlePage(value) {
+			let that = this
+			that.currpage = value
+      that.getArticle(that.currpage, that.num)
+    },
 	},
-	created() {
-		this.getAdmin()
-	},
-	mounted() {
-    this.reload();
-  }
 }
 </script>

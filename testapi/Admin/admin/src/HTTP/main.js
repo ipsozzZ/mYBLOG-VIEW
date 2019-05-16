@@ -75,6 +75,8 @@ function GetAdmins(){
 
 /**
  * 管理员登录
+ * @param { 管理员账号 } user 
+ * @param { 管理员密码 } pass 
  */
 function AdminLogin(user, pass){
 	let url = HOST_ROOT + '/?s=Admin.Login'
@@ -162,6 +164,99 @@ function editAdmin(data){
 
 /* --------------  管理员操作end  ---------------- */
 
+
+/* --------------  文章操作begin  ---------------- */
+
+/**
+ * 添加文章
+ * @param { 文章对象 } data
+ * @returns
+ */
+function addArticle(data){
+	let url = HOST_ROOT + '/?s=Article.add'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data,
+	})
+}
+
+/**
+ * 分页获取文章列表
+ * @param { 当前页 }   page
+ * @param { 每页数量 } num
+ * @returns
+ */
+function listArticle(page, num){
+	let url = HOST_ROOT + '/?s=Article.getList'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			page: page,
+			num: num,
+		}
+	})
+}
+
+/**
+ * 获取文章数量
+ * @returns
+ */
+function countArticle(){
+	let url = HOST_ROOT + '/?s=Article.getCount'
+
+	return axios({
+		method: 'get',
+		url: url,
+	})
+}
+
+/**
+ * 通过id获取文章内容
+ * @param { 文章id } id
+ * @returns
+ */
+function getArticleById(id){
+	let url = HOST_ROOT + '/?s=Article.getById'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: id
+		},
+	})
+}
+
+/**
+ * 更新文章内容
+ * @param { 文章对象 } data
+ * @returns
+ */
+function updateArticle(data){
+	let url = HOST_ROOT + '/?s=Article.update'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data,
+	})
+}
+
+function deleteArticle(Id){
+	let url = HOST_ROOT + '/?s=Article.delete'
+	let currId = common.getCache('m_id')
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id,
+			currId: currId,
+		}
+	})
+}
+
+/* --------------  文章操作end  ---------------- */
+
 /**
  * 获取验证码
  * @returns
@@ -184,4 +279,10 @@ export default {
 	addAdmin,
 	AdminLogout,
 	editAdmin,
+	addArticle,
+	listArticle,
+	countArticle,
+	getArticleById,
+	updateArticle,
+	deleteArticle,
 }

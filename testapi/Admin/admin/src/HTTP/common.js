@@ -71,6 +71,15 @@ function removeCache(key, type = myType){
 
 /* ---------------  根据系统需求封装缓存操作end  ---------------- */
 
+/**
+ * 定义分页配置
+ * @returns
+ */
+function getPageNum(){
+	let num = 10
+	return num
+}
+
 
 
 /* ------------   暴露方法   -------------- */
@@ -78,4 +87,5 @@ export default {
 	setCache,
 	getCache,
 	removeCache,
+	getPageNum,
 }
