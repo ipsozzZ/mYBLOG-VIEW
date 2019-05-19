@@ -34,6 +34,8 @@ let router = new Router({
 					path: "/HomeCard",
 					component: resolve => require(["../components/Common/HomeCard.vue"], resolve)
 				},
+
+				/* 管理员 */
 				{
 					path: "/Message/List",
 					component: resolve => require(["../components/Message/list.vue"], resolve)
@@ -50,6 +52,8 @@ let router = new Router({
 					path: "/Message/edit",
 					component: resolve => require(["../components/Message/edit.vue"], resolve)
 				},
+
+				/* 用户 */
 				{
 					path: "/User/List",
 					component: resolve => require(["../components/User/list.vue"], resolve)
@@ -58,6 +62,8 @@ let router = new Router({
 					path: "/User/add",
 					component: resolve => require(["../components/User/add.vue"], resolve)
 				},
+
+				/* 文章 */
 				{
 					path: "/Article/list",
 					component: resolve => require(["../components/Article/list.vue"], resolve)
@@ -69,6 +75,24 @@ let router = new Router({
 				{
 					path: "/Article/show/:id",
 					component: resolve => require(["../components/Article/show.vue"], resolve)
+				},
+				{
+					path: "/Article/edit/:id",
+					component: resolve => require(["../components/Article/edit.vue"], resolve)
+				},
+
+				/* 栏目 */
+				{
+					path: "/Category/list",
+					component: resolve => require(["../components/Category/list.vue"], resolve)
+				},
+				{
+					path: "/Category/add",
+					component: resolve => require(["../components/Category/add.vue"], resolve)
+				},
+				{
+					path: "/Category/edit/:id",
+					component: resolve => require(["../components/Category/edit.vue"], resolve)
 				},
 			]
 		},

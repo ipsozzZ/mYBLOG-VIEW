@@ -9,7 +9,7 @@ import vueMarkdown from 'vue-markdown'
 
 export default {
 	data () {
-		console.log(this.content)
+		return{}
 	},
 	components: {
 		vueMarkdown

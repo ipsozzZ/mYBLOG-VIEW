@@ -9,7 +9,7 @@
     <div id="List">
 			<Button><router-link to="/Article/add">添加文章</router-link></Button><br><br>
 			<!-- <Button type="primary">Primary</Button> -->
-			<i-table border :content="self" :columns="columns7" :data="managers"></i-table>
+			<i-table border :columns="columns7" :data="managers"></i-table>
     	<Page class="Page" :total="pageCount" :page-size="num" show-total :current="currpage" @on-change="handlePage"></Page>
 		</div>
 
@@ -18,23 +18,21 @@
 <script>
 
 export default {
-	inject:["reload"],
 	name: "List",
 	created() {
 		this.getCount()
 		this.getArticle(this.currpage, this.num)
-		// this.num = this.$commonjs.getPageNum()
 	},
   data () {
     return {
-			pageCount: "",
+			pageCount: 0,
 			num: 10,
 			currpage: 1,
       columns7: [
         {
           title: '文章编号',
           key: 'id',
-            
+          
         },
         {
           title: '文章标题',
@@ -43,29 +41,15 @@ export default {
 				{
           title: '文章作者',
           key: 'author',
-            
+          
 				},
-				{
-          title: '文章分类',
-          key: 'cate',
-            
-				},
-				{
-          title: '文章是否置顶',
-          key: 'istop',
-            
-				},
-				{
-          title: '文章状态',
-          key: 'state',
-            
-				},
+				
         {
           title: '操作',
           key: 'action',
           width: 200,
           align: 'center',
-          render: (h, params) => {
+          render: (h, params) => {   
             return h('div', [
               h('Button', {
                 props: {
@@ -78,7 +62,7 @@ export default {
                 on: {
                   click: () => {
 										// this.show(params.index)
-										this.$router.push("/Article/show/"+params.row.id)
+										this.$router.push("/Article/show/" + params.row.id)
                   }
                 }
 							}, '详情'),
@@ -92,7 +76,8 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.changeLimit(params.row.id)
+										// this.changeLimit(params.row.id)
+										this.$router.push("/Article/edit/" + params.row.id)
                   }
                 }
               }, '编辑'),
@@ -132,64 +117,50 @@ export default {
     }
   },
   methods: {
-    show (index) {
-      this.$Modal.info({
-        title: 'User Info',
-        content: `account: ${this.managers[index].account}<br>id: ${this.managers[index].id}<br>limit: ${this.managers[index].limit}`
-      })
-		},
     remove (index) {
-			console.log(index)
-			// this.managers.splice(index, 1);
-			let that = this
-			that.$api.deleteArticle(index).then(res => {
-				console.log(res)
+			this.$api.deleteArticle(index).then(res => {
 				if(res.data.data == null){
-					that.$Message.error("删除失败！")
+					this.$Message.error("删除失败！")
 				}
 				if(res.data.data.code == 0){
-					that.$Message.error(res.data.data.msg)
+					this.$Message.error(res.data.data.msg)
 				}else{
-					that.$Message.success("删除成功！")
-					that.managers.splice(index, 1);
-					that.$router.push('/Article/List')
+					this.$Message.success("删除成功！")
+					this.$router.push('/Article/List')
 				}
-				
 			})
 		},
 		getArticle(currpage,num){
-			let that = this
-			that.$api.listArticle(currpage, num).then( res => {
+			// let that = this
+			this.$api.listArticle(currpage, num).then( res => {
 				if(res.data.ret != 200){
-					that.$Message.success("获取数据失败！")
-					that.managers = null
+					this.$Message.success("获取数据失败！")
 				}else{
 					if(res.data.data.code == 0){
-						that.$Message.success(res.data.data.msg)
-						that.managers = null
+						this.$Message.success(res.data.data.msg)
 					}
 					else{
-						that.managers = res.data.data.data
+						this.managers = res.data.data.data
 					}
 				}
   		})
 		},
 		getCount(){
-			let that = this
-			that.$api.countArticle().then( res => {
+			// let that = this
+			this.$api.countArticle().then( res => {
 				if(res.data.ret != 200){
-					that.pageCount = 0
+					this.pageCount = 0
 				}
 				else{
-					that.pageCount = parseInt(res.data.data.data)
+					this.pageCount = parseInt(res.data.data.data)
 				}
 			})
 		},
 		handlePage(value) {
-			let that = this
-			that.currpage = value
-      that.getArticle(that.currpage, that.num)
-    },
+			// let that = this
+			this.currpage = value
+      this.getArticle(this.currpage, this.num)
+		},
 	},
 }
 </script>

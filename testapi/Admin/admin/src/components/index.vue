@@ -26,11 +26,11 @@ body{
 
 <template>
     <div class="layout">
-        <Layout>
+        <Layout name="11111">
             <v-header></v-header>
-            <Layout>
+            <Layout name="111">
 								<!-- 侧栏 -->
-							<Sider hide-trigger :style="{background: '#fff'}">
+							<Sider name="11111" hide-trigger :style="{background: '#fff'}">
       					<Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
       						  <Submenu name="1">
       						      <template slot="title">
@@ -73,11 +73,11 @@ body{
       						      <MenuItem name="5-1"><router-link to="/Category/list">栏目列表</router-link></MenuItem>
       						      <MenuItem name="5-2"><router-link to="/Category/add">添加栏目</router-link></MenuItem>
       						  </Submenu>
-										<MenuItem>
+										<MenuItem name="11111">
       						      <Icon type="ios-folder" />
       						        文件管理
       						  </MenuItem>
-										<MenuItem>
+										<MenuItem name="1111">
       						      <Icon type="md-build" />
       						        站点设置
       						  </MenuItem>
@@ -85,7 +85,7 @@ body{
   						</Sider>
 							<!-- end -->
 
-              <Layout :style="{padding: '0 24px 24px'}">
+              <Layout name="111" :style="{padding: '0 24px 24px'}">
 
 								<!-- 当前位置 -->
         				<Breadcrumb :style="{margin: '24px 0'}">
@@ -95,8 +95,10 @@ body{
 
 								<!-- content -->
         				<Content :style="{padding: '24px', minHeight: '480px', background: '#fff'}">
-            			<transition name="move" mode="out-in"><router-view>
-									</router-view></transition>
+            			<transition name="move" mode="out-in">
+										<router-view>
+										</router-view>
+									</transition>
         				</Content>
 								<!-- end -->
 

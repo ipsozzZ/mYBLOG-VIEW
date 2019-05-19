@@ -7,9 +7,8 @@
 
 <template>
     <div id="List">
-			<Button><router-link to="/Message/add">添加管理员</router-link></Button><br><br>
-			<!-- <Button type="primary">Primary</Button> -->
-			<i-table border :columns="columns7" :data="managers"></i-table>
+			<Button><router-link to="/Category/add">添加栏目</router-link></Button><br><br>
+			<i-table border :columns="columns7" :data="cate"></i-table>
 		</div>
 
 </template>
@@ -24,17 +23,15 @@ export default {
         {
           title: 'ID',
           key: 'id',
-            
         },
         {
-          title: '账号',
-					key: 'account',
+          title: '栏目名称',
+					key: 'name',
 				},
 				{
-          title: '超级管理员',
-          key: 'limit',
-            
-        },
+          title: '是否显示',
+					key: 'isshow',
+				},
         {
           title: '操作',
           key: 'action',
@@ -66,7 +63,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.changeLimit(params.row.id)
+                    this.$router.push('/Category/edit/' + params.row.id)
                   }
                 }
               }, '编辑'),
@@ -85,27 +82,13 @@ export default {
           }
         }
       ],
-      managers: [
+      cate: [
         {
 					id : 1,
-					account: 'ipso',
-					limit: 1,
+					name: 'ipso',
+					desc: "",
+					isshow: 0,
         },
-        {
-					id : 2,
-					account: 'test2',
-					limit: 1,
-        },
-        {
-					id : 3,
-					account: 'test3',
-					limit: 1,
-        },
-        {
-					id : 4,
-					account: 'test4',
-					limit: 1,
-        }
       ]
     }
   },
@@ -113,26 +96,12 @@ export default {
     show (index) {
       this.$Modal.info({
         title: 'User Info',
-        content: `account: ${this.managers[index].account}<br>id: ${this.managers[index].id}<br>limit: ${this.managers[index].limit}`
+        content: `ID: ${this.cate[index].id}<br>name: ${this.cate[index].name}<br>isshow: ${this.cate[index].isshow}<br>desc: ${this.cate[index].desc}`
       })
-		},
-		changeLimit(index) {
-			let that = this
-			that.$api.changeLimit(index).then(res => {
-				if(res.data.data == null){
-					that.$Message.error("失败！")
-				}
-				if(res.data.data.data.code == 0){
-					that.$Message.error(res.data.data.data.mag)
-				}
-				that.$Message.success("授权成功！")
-				this.$router.push('/Message/List')
-			})
-
 		},
     remove (index) {
 			let that = this
-			that.$api.deleteAdmin(index).then(res => {
+			that.$api.deleteCate(index).then(res => {
 				if(res.data.data == null){
 					that.$Message.error("删除失败！")
 				}
@@ -140,20 +109,20 @@ export default {
 					that.$Message.error(res.data.data.msg)
 				}else{
 					that.$Message.success("删除成功！")
-					this.$router.push('/Message/List')
+					this.$router.push('/Category/List')
 				}
 				
 			})
 		},
-		getAdmin(){
+		getCate(){
 			let that = this
-			this.$api.GetAdmins().then( res => {
-				this.managers = res.data.data.data
+			this.$api.getCates().then( res => {
+				this.cate = res.data.data.data
   		})
 		},
 	},
 	created() {
-		this.getAdmin()
+		this.getCate()
 	},
 }
 </script>

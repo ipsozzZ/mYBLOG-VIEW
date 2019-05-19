@@ -255,7 +255,79 @@ function deleteArticle(Id){
 	})
 }
 
+function publishArticle(Id){
+	let url = HOST_ROOT + '/?s=Article.publish'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id
+		}
+	})
+}
+
 /* --------------  文章操作end  ---------------- */
+
+/* --------------  栏目操作begin  ---------------- */
+
+/**
+ * 获取栏目列表
+ * @returns
+ */
+function getCates(){
+	let url = HOST_ROOT + '/?s=Category.getList'
+	return axios({
+		method: 'get',
+		url: url,
+	})
+}
+
+function addCate(data){
+	let url = HOST_ROOT + '/?s=Category.add'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data
+	})
+}
+
+function deleteCate(Id){
+	let url = HOST_ROOT + '/?s=Category.delete'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id
+		}
+	})
+}
+
+/**
+ * 获取栏目详情
+ * @param { 栏目Id } Id
+ * @returns
+ */
+function getCate(Id){
+	let url = HOST_ROOT + '/?s=Category.getById'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id
+		}
+	})
+}
+
+function editCate(data){
+	let url = HOST_ROOT + '/?s=Category.update'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data,
+	})
+}
+
+/* --------------  栏目操作end  ---------------- */
 
 /**
  * 获取验证码
@@ -285,4 +357,10 @@ export default {
 	getArticleById,
 	updateArticle,
 	deleteArticle,
+	publishArticle,
+	getCates,
+	addCate,
+	deleteCate,
+	getCate,
+	editCate,
 }

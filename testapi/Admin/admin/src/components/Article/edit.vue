@@ -1,6 +1,6 @@
 <template>
     <div class="Add">
-			<h2>添加文章：</h2><br>
+			<h2>编辑文章：</h2><br>
 			<Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
         <FormItem label="文章标题" prop="title">
             <Input v-model="formValidate.title" placeholder="输入文章标题"></Input>
@@ -49,7 +49,7 @@
 						
         </FormItem>
         <FormItem>
-            <Button type="primary" @click="handleSubmit('formValidate')">添加</Button>
+            <Button type="primary" @click="handleSubmit('formValidate')">修改</Button>
             <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
 						<Button @click="toList()" style="margin-left: 8px">返回列表</Button>
         </FormItem>
@@ -66,12 +66,12 @@
 					Markdown
 				},
 				created() {
-					this.formValidate.author = this.$commonjs.getCache('m_user')
+					this.currId = this.$route.params.id
+					this.getArticle()
 				},
         data () {
             return {
 								cate: [],
-								loadingStatus: false,
                 formValidate: {
                   title: '',
 									author: '',
@@ -105,7 +105,7 @@
                     if (valid) {
 											console.log(this.formValidate)
 											let that = this
-											that.$api.addArticle(that.formValidate).then( res => {
+											that.$api.updateArticle(that.formValidate).then( res => {
 												console.log(res)
 												if(res.data.ret != 200){
 													that.$Message.error('添加失败！');
@@ -118,10 +118,31 @@
 												}
 											})
                     } else {
-                        this.$Message.error('Fail!');
+                        this.$Message.error('添加失败!');
                     }
                 })
-            },
+						},
+						getArticle(){
+							let that = this
+							that.$api.getArticleById(this.$route.params.id).then( res => {
+								if(res.data.ret != 200){
+									that.$Message.console.error("获取失败！")
+									that.$router,push("/Article/list")
+								}else{
+									if(res.data.data.code == 0){
+										that.$Message.error(res.data.data.msg)
+										that.$router,push("/Article/list")
+									}
+									this.formValidate = res.data.data.data
+									if(res.data.data.data.state == 0){
+										this.formValidate.state = "未发布"
+									}else{
+										this.formValidate.state = "已发布"
+									}
+									that.$Message.success(res.data.data.msg)
+								}
+							})
+						},
             handleReset (name) {
                 this.$refs[name].resetFields();
 						},
