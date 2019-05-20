@@ -131,7 +131,7 @@ export default {
 			this.$router.push("/Article/list")
 		},
 		toUpload(){
-			this.$router.push("/Page/uploadImg")
+			this.$router.push("/Page/upload")
 		},
 		toEdit(){
 			this.$router.push("/Article/edit/" + this.article.id)

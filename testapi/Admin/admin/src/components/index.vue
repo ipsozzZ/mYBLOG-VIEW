@@ -73,10 +73,6 @@ body{
       						      <MenuItem name="5-1"><router-link to="/Category/list">栏目列表</router-link></MenuItem>
       						      <MenuItem name="5-2"><router-link to="/Category/add">添加栏目</router-link></MenuItem>
       						  </Submenu>
-										<MenuItem name="11111">
-      						      <Icon type="ios-folder" />
-      						        文件管理
-      						  </MenuItem>
 										<MenuItem name="1111">
       						      <Icon type="md-build" />
       						        站点设置

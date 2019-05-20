@@ -318,6 +318,11 @@ function getCate(Id){
 	})
 }
 
+/**
+ * 栏目编辑
+ * @param { 栏目信息 } data
+ * @returns
+ */
 function editCate(data){
 	let url = HOST_ROOT + '/?s=Category.update'
 	return axios({
@@ -328,6 +333,40 @@ function editCate(data){
 }
 
 /* --------------  栏目操作end  ---------------- */
+
+/* --------------  用户操作begin  ---------------- */
+
+/**
+ * 获取用户列表
+ * @param { 当前页码 } page
+ * @param { 每页数量 } num
+ * @returns
+ */
+function getuserList(page, num){
+	let url = HOST_ROOT + '/?s=User.getList'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			page: page,
+			num: num,
+		}
+	})
+}
+
+/**
+ * 获取用户数量
+ * @returns
+ */
+function getCount(){
+	let url = HOST_ROOT + '/?s=User.getCount'
+	return axios({
+		method: 'get',
+		url: url
+	})
+}
+
+/* --------------  用户操作end  ---------------- */
 
 /**
  * 获取验证码
@@ -363,4 +402,6 @@ export default {
 	deleteCate,
 	getCate,
 	editCate,
+	getuserList,
+	getCount,
 }

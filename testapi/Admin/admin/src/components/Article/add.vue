@@ -24,10 +24,8 @@
             <Input v-model="formValidate.state" disabled placeholder="未发布"></Input>
         </FormItem>
         <FormItem label="文章分类" prop="cate">
-            <Select v-model="formValidate.cate" placeholder="选择你的文章分类">
-                <Option value="1">PHP</Option>
-                <Option value="2">Javascript</Option>
-                <Option value="3">nodejs</Option>
+            <Select v-model="formValidate.cate"  placeholder="选择你的文章分类">
+  						<Option v-for="item in cate" v-bind:key="item.id" :value="item.id">{{ item.name }}</Option>
             </Select>
         </FormItem>
         <FormItem label="是否置顶" prop="istop">
@@ -67,6 +65,7 @@
 				},
 				created() {
 					this.formValidate.author = this.$commonjs.getCache('m_user')
+					this.getCates()
 				},
         data () {
             return {
@@ -128,6 +127,13 @@
 						toList(){
 							this.$router.push("/Article/list")
 						},
+						getCates(){
+							this.$api.getCates().then( res => {
+								if(res.data.ret == 200){
+									this.cate = res.data.data.data
+								}
+							})
+						}
         }
     }
 </script>

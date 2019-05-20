@@ -94,6 +94,12 @@ let router = new Router({
 					path: "/Category/edit/:id",
 					component: resolve => require(["../components/Category/edit.vue"], resolve)
 				},
+
+				/* 文件上传 */
+				{
+					path: "/Page/upload",
+					component: resolve => require(["../components/Page/Upload.vue"], resolve)
+				},
 			]
 		},
 		
