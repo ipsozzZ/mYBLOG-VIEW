@@ -10,9 +10,7 @@
 			<Button><router-link to="/User/add">添加用户</router-link></Button><br><br>
 			<i-table border :columns="columns7" :data="user"></i-table>
 			<Page class="Page" :total="pageCount" :page-size="num" show-total :current="currpage" @on-change="handlePage"></Page>
-
 		</div>
-
 </template>
 
 <script>
@@ -115,14 +113,13 @@ export default {
 					that.$Message.error(res.data.data.msg)
 				}else{
 					that.$Message.success("删除成功！")
-					this.$router.push('/usergory/List')
+					this.$router.push('/User/list')
 				}
 				
 			})
 		},
 		getusers(currpage, num){
 			this.$api.getuserList(currpage, num).then( res => {
-				console.log(res)
 				if(res.data.ret != 200){
 					this.$Message.error("获取数据失败！")
 				}else{
@@ -130,7 +127,7 @@ export default {
 						this.$Message.success(res.data.data.msg)
 					}
 					else{
-						this.managers = res.data.data.data
+						this.user = res.data.data.data
 					}
 				}
   		})
@@ -142,7 +139,6 @@ export default {
 		},
 		getCount(){
 			this.$api.getCount().then( res => {
-				console.log(res.data.data)
 				if(res.data.ret == 200){
 					this.pageCount = parseInt(res.data.data.data)
 				}

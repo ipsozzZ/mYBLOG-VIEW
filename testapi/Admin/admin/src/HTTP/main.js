@@ -366,6 +366,66 @@ function getCount(){
 	})
 }
 
+/**
+ * 添加用户
+ * @param { 用户信息 } data
+ * @returns
+ */
+function addUser(data){
+	let url = HOST_ROOT + '/?s=User.add'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data
+	})
+}
+
+/**
+ * 删除一条用户信息
+ * @param { 用户id } Id
+ * @returns
+ */
+function deleteuser(Id){
+	let url = HOST_ROOT + '/?s=User.delete'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id
+		}
+	})
+}
+
+/**
+ * 编辑用户信息
+ * @param { 更新后的用户信息 } data
+ * @returns
+ */
+function editUser(data){
+	let url = HOST_ROOT + '/?s=User.update'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data
+	})
+}
+
+/**
+ * 通过id获取用户信息
+ * @param {*} Id
+ * @returns
+ */
+function getUser(Id){
+	let url = HOST_ROOT + '/?s=User.getById'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id
+		}
+	})
+}
+
 /* --------------  用户操作end  ---------------- */
 
 /**
@@ -404,4 +464,8 @@ export default {
 	editCate,
 	getuserList,
 	getCount,
+	addUser,
+	deleteuser,
+	editUser,
+	getUser,
 }

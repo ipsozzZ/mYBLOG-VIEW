@@ -62,6 +62,10 @@ let router = new Router({
 					path: "/User/add",
 					component: resolve => require(["../components/User/add.vue"], resolve)
 				},
+				{
+					path: "/User/edit/:id",
+					component: resolve => require(["../components/User/edit.vue"], resolve)
+				},
 
 				/* 文章 */
 				{
