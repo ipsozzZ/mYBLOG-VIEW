@@ -428,6 +428,55 @@ function getUser(Id){
 
 /* --------------  用户操作end  ---------------- */
 
+
+/* --------------  配置操作end  ---------------- */
+
+/**
+ * 添加/更新站点配置信息
+ * @param { 站点配置信息 } data
+ * @returns
+ */
+function addConfig(Id, data){
+	let url = HOST_ROOT + '/?s=Config.add'
+	data.id = Id
+	return axios({
+		method: 'post',
+		url: url,
+		data: data
+	})
+}
+
+/**
+ * 获取配置信息Id(数据库只存一条配置信息)
+ */
+function getId(){
+	let url = HOST_ROOT + '/?s=Config.getId'
+	return axios({
+		method: 'get',
+		url: url,
+	})
+}
+
+/**
+ * 获取当前站点配置信息
+ * @param { 配置信息id } Id
+ * @returns
+ */
+function getConfig(Id){
+	let url = HOST_ROOT + '/?s=Config.getCof'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id
+		}
+	})
+}
+
+/* --------------  配置操作end  ---------------- */
+
+
+
 /**
  * 获取验证码
  * @returns
@@ -468,4 +517,7 @@ export default {
 	deleteuser,
 	editUser,
 	getUser,
+	addConfig,
+	getId,
+	getConfig,
 }

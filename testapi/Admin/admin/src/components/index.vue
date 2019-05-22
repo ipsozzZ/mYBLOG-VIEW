@@ -75,7 +75,7 @@ body{
       						  </Submenu>
 										<MenuItem name="1111">
       						      <Icon type="md-build" />
-      						        站点设置
+      						        <router-link to="/Page/Config">站点设置</router-link>
       						  </MenuItem>
     						</Menu>
   						</Sider>

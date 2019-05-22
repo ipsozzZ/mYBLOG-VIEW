@@ -104,6 +104,12 @@ let router = new Router({
 					path: "/Page/upload",
 					component: resolve => require(["../components/Page/Upload.vue"], resolve)
 				},
+
+				/* 站点配置 */
+				{
+					path: "/Page/Config",
+					component: resolve => require(["../components/Page/Config.vue"], resolve)
+				},
 			]
 		},
 		
