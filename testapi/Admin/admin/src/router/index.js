@@ -105,6 +105,30 @@ let router = new Router({
 					component: resolve => require(["../components/Page/Upload.vue"], resolve)
 				},
 
+				/* 友情链接 */
+				{
+					path: "/Friend/list",
+					component: resolve => require(["../components/Friend/list.vue"], resolve)
+				},
+				{
+					path: "/Friend/add",
+					component: resolve => require(["../components/Friend/add.vue"], resolve)
+				},
+				{
+					path: "/Friend/edit/:id",
+					component: resolve => require(["../components/Friend/edit.vue"], resolve)
+				},
+
+				/* 评论管理 */
+				{
+					path: "/Comment/list",
+					component: resolve => require(["../components/Comment/list.vue"], resolve)
+				},
+				{
+					path: "/Comment/edit/:id",
+					component: resolve => require(["../components/Comment/edit.vue"], resolve)
+				},
+
 				/* 站点配置 */
 				{
 					path: "/Page/Config",

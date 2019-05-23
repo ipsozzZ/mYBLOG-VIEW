@@ -7,9 +7,8 @@
 
 <template>
     <div id="List">
-			<Button><router-link to="/User/add">添加用户</router-link></Button><br><br>
-			<i-table border :columns="columns7" :data="user"></i-table>
-			<Page class="Page" :total="pageCount" :page-size="num" show-total :current="currpage" @on-change="handlePage"></Page>
+			<Button><router-link to="/friend/add">添加友链</router-link></Button><br><br>
+			<i-table border :columns="columns7" :data="friend"></i-table>
 		</div>
 </template>
 
@@ -18,22 +17,26 @@
 export default {
 	name: "List",
 	created() {
-		this.getCount()
-		this.getusers(this.currpage, this.num)
+		this.getfriends()
 	},
   data () {
     return {
-			pageCount: 0,
-			num: 10,
-			currpage: 1,
       columns7: [
         {
           title: 'ID',
           key: 'id',
         },
         {
-          title: '用户名',
+          title: '昵称',
 					key: 'name',
+				},
+				{
+          title: '地址',
+					key: 'address',
+				},
+				{
+          title: '备注',
+					key: 'remarks',
 				},
         {
           title: '操作',
@@ -66,7 +69,7 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.$router.push('/User/edit/' + params.row.id)
+                    this.$router.push('/Friend/edit/' + params.row.id)
                   }
                 }
               }, '编辑'),
@@ -85,27 +88,20 @@ export default {
           }
         }
       ],
-      user: [
-        // {
-				// 	id : 1,
-				// 	name: 'ipso',
-				// 	pass: "",
-				// 	like: "",
-				// 	about: "",
-        // },
-      ]
+      friend: []
     }
   },
   methods: {
     show (index) {
       this.$Modal.info({
-        title: 'User Info',
-        content: `ID: ${this.user[index].id}<br>name: ${this.user[index].name}<br>about: ${this.user[index].about}`
+        title: 'friend Info',
+				content: `ID: ${this.friend[index].id}<br>name: ${this.friend[index].name}<br>address: ${this.friend[index].address}
+				<br>state: ${this.friend[index].state}<br>isshow: ${this.friend[index].isshow}<br>remarks: ${this.friend[index].remarks}`
       })
 		},
     remove (index) {
 			let that = this
-			that.$api.deleteuser(index).then(res => {
+			that.$api.deleteFriend(index).then(res => {
 				if(res.data.data == null){
 					that.$Message.error("删除失败！")
 				}
@@ -113,14 +109,14 @@ export default {
 					that.$Message.error(res.data.data.msg)
 				}else{
 					that.$Message.success("删除成功！")
-					that.getCount()
-					that.getusers(that.currpage, that.num)
+					that.getfriends()
 				}
 				
 			})
 		},
-		getusers(currpage, num){
-			this.$api.getuserList(currpage, num).then( res => {
+		getfriends(){
+			this.$api.getfriends().then( res => {
+				// console.log(res)
 				if(res.data.ret != 200){
 					this.$Message.error("获取数据失败！")
 				}else{
@@ -128,7 +124,7 @@ export default {
 						this.$Message.success(res.data.data.msg)
 					}
 					else{
-						this.user = res.data.data.data
+						this.friend = res.data.data.data
 					}
 				}
   		})
@@ -136,15 +132,8 @@ export default {
 		handlePage(value) {
 			// let that = this
 			this.currpage = value
-      this.getUsers(this.currpage, this.num)
+      this.getfriends()
 		},
-		getCount(){
-			this.$api.getUserCount().then( res => {
-				if(res.data.ret == 200){
-					this.pageCount = parseInt(res.data.data.data)
-				}
-			})
-		}
 	},
 	
 }

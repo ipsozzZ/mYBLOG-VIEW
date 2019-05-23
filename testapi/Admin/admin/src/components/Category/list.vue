@@ -109,7 +109,7 @@ export default {
 					that.$Message.error(res.data.data.msg)
 				}else{
 					that.$Message.success("删除成功！")
-					this.$router.push('/Category/List')
+					that.getCate()
 				}
 				
 			})

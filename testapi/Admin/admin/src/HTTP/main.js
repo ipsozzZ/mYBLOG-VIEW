@@ -1,5 +1,6 @@
 /**
  * 前后台数据交互
+ * 注意：添加function时取名请避免方法名出现耦合
  * @author ipso
  */
 
@@ -242,6 +243,11 @@ function updateArticle(data){
 	})
 }
 
+/**
+ * 删除一条记录
+ * @param { 文章id } Id
+ * @returns
+ */
 function deleteArticle(Id){
 	let url = HOST_ROOT + '/?s=Article.delete'
 	let currId = common.getCache('m_id')
@@ -255,6 +261,11 @@ function deleteArticle(Id){
 	})
 }
 
+/**
+ * 发布一篇文章
+ * @param { 文章id } Id
+ * @returns
+ */
 function publishArticle(Id){
 	let url = HOST_ROOT + '/?s=Article.publish'
 	return axios({
@@ -263,6 +274,18 @@ function publishArticle(Id){
 		data: {
 			id: Id
 		}
+	})
+}
+
+/**
+ * 获取所有文章的id和title字段
+ * @returns
+ */
+function getAllArticle(){
+	let url = HOST_ROOT + '/?s=Article.getAll'
+	return axios({
+		method: 'get',
+		url: url,
 	})
 }
 
@@ -358,7 +381,7 @@ function getuserList(page, num){
  * 获取用户数量
  * @returns
  */
-function getCount(){
+function getUserCount(){
 	let url = HOST_ROOT + '/?s=User.getCount'
 	return axios({
 		method: 'get',
@@ -476,6 +499,200 @@ function getConfig(Id){
 /* --------------  配置操作end  ---------------- */
 
 
+/* --------------  友情链接操作begin  ---------------- */
+
+/**
+ * 获取友链列表
+ * @returns 友链列表对象
+ */
+function getfriends(){
+	let url = HOST_ROOT + '/?s=Friendlink.getList'
+	return axios({
+		method: 'get',
+		url: url,
+	})
+}
+
+/**
+ * 添加一条友情链接
+ * @param { 友链信息 } data
+ * @returns
+ */
+function addFriend(data){
+	let url = HOST_ROOT + '/?s=Friendlink.add'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data,
+	})
+}
+
+/**
+ * 更新一条友情链接
+ * @param { 友链信息 } data
+ * @returns
+ */
+function editFriend(data) {
+	let url = HOST_ROOT + '/?s=Friendlink.update'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data,
+	})
+}
+
+/**
+ * 获取一条友情链接
+ * @param { 友链id } Id
+ * @returns
+ */
+function getFriend(Id) {
+	let url = HOST_ROOT + '/?s=Friendlink.getById'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id
+		}
+	})
+}
+
+/**
+ * 删除一条友情链接
+ * @param { 友链id } Id
+ * @returns
+ */
+function deleteFriend(Id) {
+	let url = HOST_ROOT + '/?s=Friendlink.delete'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id
+		}
+	})
+}
+
+/* --------------  友情链接操作end  ---------------- */
+
+
+/* --------------  评论操作begin  ---------------- */
+
+/**
+ * 获取所有评论数
+ * @returns
+ */
+function getCommentCount(){
+	let url = HOST_ROOT + '/?s=Comment.getCount'
+	return axios({
+		method: 'get',
+		url: url
+	})
+}
+
+/**
+ * 通过文章id获取评论数
+ * @param { 文章id } aid
+ * @returns
+ */
+function getCountByArticle(aid){
+	let url = HOST_ROOT + '/?s=Comment.getCountByArticle'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			aid: aid
+		}
+	})
+}
+
+/**
+ * 获取文章列表
+ * @param { 当前页 } page
+ * @param { 每页数量 } num
+ * @returns
+ */
+function getCommentList(page, num){
+	let url = HOST_ROOT + '/?s=Comment.getList'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			page: page,
+			num: num
+		}
+	})
+}
+
+/**
+ * 通过文章id获取评论列表
+ * @param { 文章id } aid
+ * @param { 当前页 } page
+ * @param { 每页数量 } num
+ * @returns
+ */
+function getListByArticle(aid, page, num) {
+	let url = HOST_ROOT + '/?s=Comment.getListByArticle'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			aid: aid,
+			page: page,
+			num: num
+		}
+	})
+}
+
+/**
+ * 删除一条评论
+ * @param { 评论id } Id
+ * @returns
+ */
+function deleteComment(Id){
+	let url = HOST_ROOT + '/?s=Comment.delete'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id,
+		}
+	})
+}
+
+/**
+ * 更新一条评论
+ * @param { 评论信息 } data
+ * @returns
+ */
+function editComment(data){
+	let url = HOST_ROOT + '/?s=Comment.update'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data,
+	})
+}
+
+/**
+ * 通过id获取一条评论
+ * @param { 评论id } Id
+ * @returns
+ */
+function getComment(Id){
+	let url = HOST_ROOT + '/?s=Comment.getById'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id,
+		}
+	})
+}
+
+/* --------------  评论操作end  ---------------- */
+
+
 
 /**
  * 获取验证码
@@ -506,13 +723,14 @@ export default {
 	updateArticle,
 	deleteArticle,
 	publishArticle,
+	getAllArticle,
 	getCates,
 	addCate,
 	deleteCate,
 	getCate,
 	editCate,
 	getuserList,
-	getCount,
+	getUserCount,
 	addUser,
 	deleteuser,
 	editUser,
@@ -520,4 +738,16 @@ export default {
 	addConfig,
 	getId,
 	getConfig,
+	getfriends,
+	addFriend,
+	editFriend,
+	getFriend,
+	deleteFriend,
+	getCommentCount,
+	getCountByArticle,
+	getCommentList,
+	getListByArticle,
+	deleteComment,
+	editComment,
+	getComment,
 }

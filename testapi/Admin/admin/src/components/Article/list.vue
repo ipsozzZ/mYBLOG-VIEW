@@ -126,7 +126,8 @@ export default {
 					this.$Message.error(res.data.data.msg)
 				}else{
 					this.$Message.success("删除成功！")
-					this.$router.push('/Article/List')
+					this.getCount()
+					this.getArticle(this.currpage, this.num)
 				}
 			})
 		},
