@@ -15,9 +15,6 @@ import common from './common'
 /* 需要跨域时将此处注释代码取消注释 */
 let HOST_ROOT = '/api'
 
-/* 设置axios为form-data */
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.transformRequest = [function (data) {
 	let ret = ''
 	for (let it in data) {
@@ -692,6 +689,26 @@ function getComment(Id){
 
 /* --------------  评论操作end  ---------------- */
 
+/* --------------  文件上传操作begin  ---------------- */
+
+/**
+ * 图片上传
+ * @param { 文件对象 } file
+ * @returns
+ */
+function UploadImg(file){
+	let url = HOST_ROOT + '/?s=Upload.uploadImg'
+	return axios({
+		method: 'post',
+		url: url,
+		transformRequest: [function (file) { return file }],
+		data: file
+	})
+}
+
+
+/* --------------  文件上传操作end  ---------------- */
+
 
 
 /**
@@ -750,4 +767,5 @@ export default {
 	deleteComment,
 	editComment,
 	getComment,
+	UploadImg,
 }

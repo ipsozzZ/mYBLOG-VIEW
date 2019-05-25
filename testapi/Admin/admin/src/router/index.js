@@ -37,20 +37,20 @@ let router = new Router({
 
 				/* 管理员 */
 				{
-					path: "/Message/List",
-					component: resolve => require(["../components/Message/list.vue"], resolve)
+					path: "/Manage/List",
+					component: resolve => require(["../components/Manage/list.vue"], resolve)
 				},
 				{
-					path: "/Message/Add",
-					component: resolve => require(["../components/Message/add.vue"], resolve)
+					path: "/Manage/Add",
+					component: resolve => require(["../components/Manage/add.vue"], resolve)
 				},
 				{
-					path: "/Message/info",
-					component: resolve => require(["../components/Message/info.vue"], resolve)
+					path: "/Manage/info",
+					component: resolve => require(["../components/Manage/info.vue"], resolve)
 				},
 				{
-					path: "/Message/edit",
-					component: resolve => require(["../components/Message/edit.vue"], resolve)
+					path: "/Manage/edit",
+					component: resolve => require(["../components/Manage/edit.vue"], resolve)
 				},
 
 				/* 用户 */
@@ -133,6 +133,12 @@ let router = new Router({
 				{
 					path: "/Page/Config",
 					component: resolve => require(["../components/Page/Config.vue"], resolve)
+				},
+
+				/* 图片管理 */
+				{
+					path: "/Page/Upload",
+					component: resolve => require(["../components/Page/Upload.vue"], resolve)
 				},
 			]
 		},

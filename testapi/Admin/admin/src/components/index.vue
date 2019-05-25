@@ -37,8 +37,8 @@ body{
 														<Icon type="md-person"></Icon>
       						          站点管理员
       						      </template>
-      						      <MenuItem name="1-1"> <router-link to="/Message/list">管理员列表</router-link> </MenuItem>
-      						      <MenuItem name="1-2"> <router-link to="/Message/add">添加管理员</router-link></MenuItem>
+      						      <MenuItem name="1-1"> <router-link to="/Manage/list">管理员列表</router-link> </MenuItem>
+      						      <MenuItem name="1-2"> <router-link to="/Manage/add">添加管理员</router-link></MenuItem>
       						  </Submenu>
       						  <Submenu name="2">
       						      <template slot="title">
@@ -78,8 +78,16 @@ body{
       						          <Icon type="ios-cafe" />
       						          友链管理
       						      </template>
-      						      <MenuItem name="5-1"><router-link to="/Friend/list">友链列表</router-link></MenuItem>
-      						      <MenuItem name="5-2"><router-link to="/Friend/add">添加友链</router-link></MenuItem>
+      						      <MenuItem name="6-1"><router-link to="/Friend/list">友链列表</router-link></MenuItem>
+      						      <MenuItem name="6-2"><router-link to="/Friend/add">添加友链</router-link></MenuItem>
+      						  </Submenu>
+										<Submenu name="7">
+      						      <template slot="title">
+      						          <Icon type="ios-cafe" />
+      						          图片管理
+      						      </template>
+      						      <MenuItem name="7-1"><router-link to="/Page/Picture">图片列表</router-link></MenuItem>
+      						      <MenuItem name="7-2"><router-link to="/Page/Upload">添加图片</router-link></MenuItem>
       						  </Submenu>
 										<MenuItem name="1111">
       						      <Icon type="md-build" />

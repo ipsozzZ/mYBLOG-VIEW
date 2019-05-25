@@ -79,7 +79,7 @@ Form{
 												}else{
 													this.$commonjs.setCache('m_user', this.formCustom.Account);
 													this.$Message.success(res.data.data.msg);
-													this.$router.push('/index')
+													this.$router.push('/Manage/List')
 												}
 											})
                     } else {

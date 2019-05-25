@@ -7,7 +7,7 @@
 
 <template>
     <div id="List">
-			<Button><router-link to="/Message/add">添加管理员</router-link></Button><br><br>
+			<Button><router-link to="/Manage/add">添加管理员</router-link></Button><br><br>
 			<!-- <Button type="primary">Primary</Button> -->
 			<i-table border :columns="columns7" :data="managers"></i-table>
 		</div>
@@ -126,7 +126,7 @@ export default {
 					that.$Message.error(res.data.data.data.mag)
 				}
 				that.$Message.success("授权成功！")
-				this.$router.push('/Message/List')
+				this.$router.push('/Manage/List')
 			})
 
 		},

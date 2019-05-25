@@ -17,11 +17,11 @@
 				<FormItem label="站点地址" prop="address">
             <Input v-model="formValidate.address" placeholder="输入站点地址"></Input>
         </FormItem>
-        <FormItem label="站点状态" prop="state">
-            <RadioGroup v-model="formValidate.state">
-                <Radio label="0">关站</Radio>
-                <Radio label="1">开站</Radio>
-            </RadioGroup>
+				<FormItem label="站点状态" prop="state">
+            <i-switch v-model="formValidate.state" size="large">
+                <span slot="open">On</span>
+                <span slot="close">Off</span>
+            </i-switch>
         </FormItem>
         <FormItem label="关站信息" prop="info">
 					<Input v-model="formValidate.info" placeholder="输入关站信息"></Input>
@@ -57,7 +57,7 @@
 									desc: '',
                   email: '',
                   address: '',
-									state: 0,
+									state: false,
 									info: '',
                 },
                 ruleValidate: {

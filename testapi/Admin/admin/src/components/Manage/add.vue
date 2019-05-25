@@ -109,7 +109,7 @@ Form{
 													this.$Message.error(res.data.data.msg);
 												}else{
 													this.$Message.success(res.data.data.msg);
-													this.$router.push('/Message/List')
+													this.$router.push('/Manage/List')
 												}
 											})
                     } else {
