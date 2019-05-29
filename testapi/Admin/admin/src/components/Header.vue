@@ -23,19 +23,20 @@
     <Menu mode="horizontal" theme="dark" active-name="1">
         <div class="layout-logo"><img src="../assets/logo.png" width="30px"></div>
         <div class="layout-nav">
-            <MenuItem name="2">
-                <Icon type="ios-keypad"></Icon>
-                Item 2
-            </MenuItem>
+          <MenuItem name="2">
+            <Icon type="ios-keypad"></Icon>
+            <!-- Item 2 -->
+						<a href="/front/index" style="color: #F7F7F7">ipso</a>
+          </MenuItem>
         </div>
 				<Submenu name="1">
-								<template slot="title">
-      						  <Icon type="md-person"></Icon>
-      						  {{ admin }}
-      					</template>
-								<MenuItem name="1-1"><Button @click="getMyInfo()">我的资料</Button></MenuItem>
-      					<MenuItem name="1-2"><Button @click="logout()">退出登录</Button></MenuItem>
-            </Submenu>
+					<template slot="title">
+      			<Icon type="md-person"></Icon>
+      			{{ admin }}
+      		</template>
+					<MenuItem name="1-1"><Button @click="getMyInfo()">我的资料</Button></MenuItem>
+      		<MenuItem name="1-2"><Button @click="logout()">退出登录</Button></MenuItem>
+      </Submenu>
     </Menu>
 </Header>
 </div>
@@ -47,6 +48,7 @@ export default {
 	data(){
 		return {
 			admin: "",
+			logo: []
 		}
 	},
 	created(){
@@ -63,7 +65,7 @@ export default {
 		},
 		getMyInfo(){
 			let that = this
-			that.$router.push('/Message/info')
+			that.$router.push('/Manage/info')
 
 		},
 	},

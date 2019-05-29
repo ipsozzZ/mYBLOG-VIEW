@@ -5,7 +5,9 @@ import App from './App'
 import router from './router'
 import Axios from 'axios'
 import api from './HTTP/main'
-import iView from 'iview';
+import iView from 'iview'
+import { Alert, Icon, Button, Modal, Tree, Message, Loader } from 'iview'
+import 'iview/dist/styles/iview.css'
 
 /* 在组件中使用axios请求接口 */
 Vue.prototype.$axios = Axios

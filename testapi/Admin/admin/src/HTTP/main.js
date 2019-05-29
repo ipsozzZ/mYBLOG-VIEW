@@ -706,6 +706,89 @@ function UploadImg(file){
 	})
 }
 
+/**
+ * 获取图片数量
+ * @param { 图片分类(可选参数) } [type=null]
+ * @returns
+ */
+function getPicCount(type){
+	let url = HOST_ROOT + '/?s=Picture.getCount'
+	if(type == null){
+		return axios({
+			method: 'post',
+			url: url,
+		})
+	}
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			type: type
+		}
+	})
+}
+
+/**
+ * 通过图片id获取一张图片信息
+ * @param {*} Id
+ * @returns
+ */
+function getPicById(Id){
+	let url = HOST_ROOT + '/?s=Picture.getById'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id
+		}
+	})
+}
+
+/**
+ * 获取图片列表
+ * @param { 图片分类 } page
+ * @param { 每页数量 } num
+ * @param { 当前页码 } [type=null]
+ * @returns
+ */
+function getPicList(page, num, type) {
+	let url = HOST_ROOT + '/?s=Picture.getList'
+	if(type == null){
+		return axios({
+			method: 'post',
+			url: url,
+			data: {
+				page: page,
+				num: num
+			}
+		})
+	}
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			type: type,
+			page: page,
+			num: num
+		}
+	})
+}
+
+/**
+ * 根据id删除图片
+ * @param { 图片id } Id
+ * @returns
+ */
+function deletePic(Id){
+	let url = HOST_ROOT + '/?s=Picture.delete'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id
+		}
+	})
+}
 
 /* --------------  文件上传操作end  ---------------- */
 
@@ -768,4 +851,8 @@ export default {
 	editComment,
 	getComment,
 	UploadImg,
+	getPicCount,
+	deletePic,
+	getPicList,
+	getPicById,
 }

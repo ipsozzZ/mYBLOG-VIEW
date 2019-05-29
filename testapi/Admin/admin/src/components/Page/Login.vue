@@ -91,7 +91,6 @@
 				},
 				created: function(){
 					this.getCode();
-					console.log(this.serverCode)
 				},
         methods: {
 					  handleSubmit(name){
@@ -114,27 +113,24 @@
               })
 						},
             login (user, pass, cb) {
-							let admin = user // this.formCustom.username
-							let pwd  = pass // this.formCustom.pass
+							let admin = user
+							let pwd  = pass
 							this.$api.AdminLogin(admin, pwd).then( res => {
-								console.log(res.data.data.data.id)
-								let CurrId = res.data.data.data.id
-								let CurrUsername = res.data.data.data.account
-								 if(res.data.ret == 200){
-									//  localStorage.setItem("m_user", this.formCustom.username)
-									 this.$commonjs.setCache("m_user", CurrUsername)
-									 this.$commonjs.setCache("m_id", CurrId)
-									 cb(true)
-								 }else{
+								if(res.data.ret == 200 && res.data.data.code == 1){
+									let CurrId = res.data.data.data.id
+									let CurrUsername = res.data.data.data.account
+									this.$commonjs.setCache("m_user", CurrUsername)
+									this.$commonjs.setCache("m_id", CurrId)
+									cb(true)
+								}else{
 									 cb(false)
-								 }
+								}
 							})
 						},
 						getCode(){
 							const that = this
 							that.$api.getCode().then(res => {
 								 if(res.data.ret == 200){
-									 console.log(res.data.data.data.code)
 									 that.pic = res.data.data.data.pic
 									 that.serverCode = res.data.data.data.code
 								 }else{

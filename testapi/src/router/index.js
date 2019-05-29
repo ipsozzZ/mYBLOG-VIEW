@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Register from '@/components/Register'
-import Home from '@/components/home'
 
 Vue.use(Router)
 
@@ -18,10 +15,26 @@ export default new Router({
 		// 	name: 'Register',
 		// 	component: Register
 		// },
+
 		{
 			path: '/',
+			redirect: '/home',
+		},
+		{
+			path: '/home',
 			name: 'Home',
-			component: Home
-		}
+			component: resolve => require(['../components/home.vue'], resolve)
+		},
+		{
+			path: '/index',
+			name: 'Index',
+			component: resolve => require(['../Page/index.vue'], resolve)
+		},
+
+		// {
+		// 	path: '/Page/index',
+		// 	name: 'Home',
+		// 	component: Home
+		// }
   ]
 })

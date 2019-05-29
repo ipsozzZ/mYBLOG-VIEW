@@ -86,7 +86,7 @@ body{
       						          <Icon type="ios-cafe" />
       						          图片管理
       						      </template>
-      						      <MenuItem name="7-1"><router-link to="/Page/Picture">图片列表</router-link></MenuItem>
+      						      <MenuItem name="7-1"><router-link to="/Picture/list">图片列表</router-link></MenuItem>
       						      <MenuItem name="7-2"><router-link to="/Page/Upload">添加图片</router-link></MenuItem>
       						  </Submenu>
 										<MenuItem name="1111">

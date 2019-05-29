@@ -5,7 +5,7 @@
 			<div class="say">一起交流✳一起进步✳一起哈皮</div>
 		</header>
 		<div id="logo">
-			<div><router-link to="/src/components/Index"><img src="../../src/assets/logo.jpg"></router-link></div>
+			<div><router-link to="/index"><img src="../../src/assets/logo.jpg"></router-link></div>
 			<div><router-link to="/src/components/Activity"><img src="../../src/assets/images/activity.png"></router-link></div>
 			<div><a target="_blank" href="https://github.com/ipsozzZ"><img src="../../src/assets/images/github.png"></a></div>
 			<div><a target="_blank" href="https://weibo.com/6144279237/profile?topnav=1&wvr=6&is_all=1"><img src="../../src/assets/images/weibo.png"></a></div>

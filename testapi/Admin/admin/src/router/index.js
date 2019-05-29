@@ -16,7 +16,7 @@ let router = new Router({
 
   routes: [
     {
-      path: '/',
+      path: '/Admin',
 			redirect: '/login',
 		},
 		{
@@ -139,6 +139,14 @@ let router = new Router({
 				{
 					path: "/Page/Upload",
 					component: resolve => require(["../components/Page/Upload.vue"], resolve)
+				},
+				{
+					path: "/Picture/list",
+					component: resolve => require(["../components/Picture/list.vue"], resolve)
+				},
+				{
+					path: "/Picture/show/:id",
+					component: resolve => require(["../components/Picture/show.vue"], resolve)
 				},
 			]
 		},
