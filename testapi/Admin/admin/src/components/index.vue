@@ -104,7 +104,6 @@ body{
             			<BreadcrumbItem>{{ Home }}</BreadcrumbItem>
         				</Breadcrumb>
 								<!-- end -->
-
 								<!-- content -->
         				<Content :style="{padding: '24px', minHeight: '480px', background: '#fff'}">
             			<transition name="move" mode="out-in">

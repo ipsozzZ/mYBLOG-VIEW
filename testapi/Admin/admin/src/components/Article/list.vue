@@ -61,7 +61,6 @@ export default {
                 },
                 on: {
                   click: () => {
-										// this.show(params.index)
 										this.$router.push("/Article/show/" + params.row.id)
                   }
                 }
@@ -76,7 +75,6 @@ export default {
                 },
                 on: {
                   click: () => {
-										// this.changeLimit(params.row.id)
 										this.$router.push("/Article/edit/" + params.row.id)
                   }
                 }
@@ -132,8 +130,8 @@ export default {
 			})
 		},
 		getArticle(currpage,num){
-			// let that = this
 			this.$api.listArticle(currpage, num).then( res => {
+				console.log(res)
 				if(res.data.ret != 200){
 					this.$Message.success("获取数据失败！")
 				}else{
@@ -147,7 +145,6 @@ export default {
   		})
 		},
 		getCount(){
-			// let that = this
 			this.$api.countArticle().then( res => {
 				if(res.data.ret != 200){
 					this.pageCount = 0
@@ -158,7 +155,6 @@ export default {
 			})
 		},
 		handlePage(value) {
-			// let that = this
 			this.currpage = value
       this.getArticle(this.currpage, this.num)
 		},

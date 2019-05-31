@@ -7,6 +7,9 @@
   max-width: 350px;
   height: auto;
 }
+.hand:hover{
+	cursor:pointer
+}
 </style>
 
 <template>
@@ -15,77 +18,37 @@
       <div class="container">
         <div class="row">
           <div class="col-md-9 Article">
-            <div class="blog-main">
+
+            <div class="blog-main" v-for="article in articles" v-bind:key="article.id">
 							<div class="col-md-6">
-								<a href="singlepost.html">
-              		<img src="../assets/img/1.jpg" class="img-responsive" />
+								<a href="javascript:;" @click="show(article.id)">
+              		<img :src="article.face" class="img-responsive" />
               	</a>
 							</div>
-              
               <div class="blog-txt">
 								<div class="heading-blog">
-                 The security is main concern while concern whileconcern while
+                 {{ article.title }}
                 </div>
-                  Lorem
+                  {{ article.desc }}
 								<div class="blog-info">
-                	<span class="label label-primary">Posted on 26th November 2014</span>
-                	<span class="label label-success">In Technology</span>
-                	<span class="label label-danger">By Jhon</span>
+                	<span class="label label-primary">{{ article.ctime }}</span>
+                	<span class="label label-success">{{ article.author }}</span>
+                	<span class="label label-primary" style="background-color: #515151;">
+										{{ article.like }}
+										<Icon v-if="article.islike == true" type="ios-heart-outline" class="hand" @click="addLike(article.id)" size="20" />
+										<Icon v-else type="ios-heart" class="hand" @click="addLike(article.id)" size="20"  />
+									</span>
                 	<span class="label label-info">
-                  	<i class="fa fa-thumbs-up"></i>+ 10
-              			<i class="fa fa-thumbs-down"></i>-3
+              			{{ article.comments }}
+										<Icon type="ios-chatboxes-outline" size="20" />
                 	</span>
               	</div>
               </div>
             </div>
             <!--BLOG ONE END -->
-            <div class="blog-main">
-							<div class="col-md-6">
-								<a href="singlepost.html">
-              		<img src="../assets/img/2.jpg" class="img-responsive" />
-              	</a>
-							</div>
-              <div class="blog-txt">
-								<div class="heading-blog">
-                	phalpai的使用总结
-              	</div>
-                  LoremLoremLoremLoremLoremLorem LoremLoremLorem L
-								<div class="blog-info">
-                	<span class="label label-primary">Posted on 26th November 2014</span>
-                	<span class="label label-success">In Technology</span>
-                	<span class="label label-danger">By Jhon</span>
-                	<span class="label label-info">
-                  	<i class="fa fa-thumbs-up"></i>+ 10
-              			<i class="fa fa-thumbs-down"></i>-3
-                	</span>
-              	</div>
-              </div>
-            </div>
-             <!--BLOG TWO END -->
-						 <div class="blog-main">
-							<div class="col-md-6">
-								<a href="singlepost.html">
-              		<img src="../assets/img/2.jpg" class="img-responsive" />
-              	</a>
-							</div>
-              <div class="blog-txt">
-								<div class="heading-blog">
-                	phalpai的使用总结
-              	</div>
-                  LoremLoremLoremLoremLoremLorem LoremLoremLorem L
-								<div class="blog-info">
-                	<span class="label label-primary">Posted on 26th November 2014</span>
-                	<span class="label label-success">In Technology</span>
-                	<span class="label label-danger">By Jhon</span>
-                	<span class="label label-info">
-                  	<i class="fa fa-thumbs-up"></i>+ 10
-              			<i class="fa fa-thumbs-down"></i>-3
-                	</span>
-              	</div>
-              </div>
-            </div>
+
             <nav>
-              <Page :total="20" show-total />
+              <Page :total="pageCount" show-total :page-size="num" :current="currpage" @on-change="handlePage" />
             </nav>
              <!--PAGING  END -->
         </div>
@@ -94,21 +57,15 @@
         		<li class="list-group-item">
    						<strong>Main Categories</strong>
   					</li>
-  					<li class="list-group-item">
-  					  <span class="badge">104</span>
-  					  <a href="#">Technology</a> 
+
+						<li @click="getCount()" class="list-group-item">
+  					  <span class="badge">{{ this.All }}</span>
+  					  <a href="javascript:;"  >ALL</a> 
   					</li>
-        		<li class="list-group-item">
-    					<span class="badge">34</span>
-							<a href="#">Blogging</a> 
-  					</li>
-        		<li class="list-group-item">
-    					<span class="badge">10</span>
-							<a href="#">Information</a>
-  					</li>
-         		<li class="list-group-item">
-    					<span class="badge">50</span>
-							<a href="#">Security</a>
+
+  					<li v-for="cate in cates" v-bind:key="cate.id" @click="getCount(cate)" class="list-group-item">
+  					  <span class="badge">{{ cate.count }}</span>
+  					  <a href="javascript:;"  >{{ cate.name }}</a> 
   					</li>
 					</ul>
 
@@ -116,11 +73,11 @@
           	<li class="list-group-item">Advrtisements
             </li>
             <li class="list-group-item">
-              <a href="#">
+              <a href="javascript:;">
                 <img src="../assets/img/ad1.jpg" class="img-responsive" />
               </a>
               <br />
-            	<a href="#">
+            	<a href="javascript:;">
                 <img src="../assets/img/ad2.jpg" class="img-responsive" />
               </a>
             </li>
@@ -135,7 +92,7 @@
               <div class="panel-body">
                 <input type="text" class="form-control" placeholder="Your Email" />
                   <hr />
-                  <a href="#" class="btn btn-info btn-sm btn-block">subscribe</a>
+                  <a href="javascript:;" class="btn btn-info btn-sm btn-block">subscribe</a>
                 </div>
               </div>
             </div>
@@ -152,13 +109,91 @@ export default {
   name: 'ArticleList',
   data(){
   	return {
+			All: 0,
+			isLike: 'like',
+			currCate: 0,
+			pageCount: 0,
+			num: 10,
+			currpage: 1,
   		blogs:{
 				title: 'ipso',
 				id: 0,
 				content: 'content'
 			},
-  		search:""
+			cates: [],
+			articles: [],
   	}
-  },
+	},
+	created() {
+		this.getCate()
+		this.getCount()
+		// this.getArticle(this.currpage, this.num)
+	},
+	methods: {
+		getCate(){
+			this.$api.getCates().then( res => {
+				if(res.data.ret == 200 && res.data.data.code == 1){
+					this.cates = res.data.data.data
+				}else{
+					this.cates = []
+				}
+			})
+		},
+		getCount(index = null){
+			if(index == null){
+				this.currCate = 0
+			}else{
+				this.currCate = index.id
+			}
+			if(this.currCate === 0){
+				this.$api.countArticle().then( res => {
+					if(res.data.ret != 200){
+						this.pageCount = 0
+					}
+					else{
+						this.pageCount = parseInt(res.data.data.data)
+						this.All = parseInt(res.data.data.data)
+						this.getArticle(this.currpage, this.num)
+					}
+				})
+			}else{
+				this.pageCount = parseInt(index.count)
+				this.getArticle(this.currpage, this.num, this.currCate)
+			}
+		},
+		getArticle(page, num, cate = 0){
+			this.$api.getArticles(page, num, cate).then( res => {
+				console.log(res.data.data)
+				if(res.data.ret == 200 && res.data.data.code == 1){
+					this.articles = res.data.data.data
+				}else{
+					this.articles = []
+				}
+			})
+		},
+		handlePage(value) {
+			this.currpage = value
+			this.getArticle(this.currpage, this.num, this.currCate)
+		},
+		addLike(index){
+			console.log()
+			if(!this.$commonjs.getCache(this.isLike)){
+				this.like = true
+			}else{
+				this.addLike(index).then( res => {
+					console.log(res)
+					if(res.data.ret == 200 && res.data.data.code == 1){
+						this.like = true
+						this.$commonjs.setCache(this.isLike, 1)
+						this.$Message.success(res.data.data.msg)
+						this.getArticle(this.currpage, this.num, this.currCate)
+					}else{
+						this.like = false
+						this.$Message.success('error!')
+					}
+				})
+			}
+		}
+	}
 }
 </script>

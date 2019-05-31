@@ -449,7 +449,7 @@ function getUser(Id){
 /* --------------  用户操作end  ---------------- */
 
 
-/* --------------  配置操作end  ---------------- */
+/* --------------  配置操作begin  ---------------- */
 
 /**
  * 添加/更新站点配置信息
@@ -790,6 +790,22 @@ function deletePic(Id){
 	})
 }
 
+/**
+ * 通过图片分类获取图片
+ * @param { 图片分类 } type
+ * @returns
+ */
+function getPicByType(type){
+	let url = HOST_ROOT + '/?s=Picture.getByType'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			type: type,
+		}
+	})
+}
+
 /* --------------  文件上传操作end  ---------------- */
 
 
@@ -855,4 +871,5 @@ export default {
 	deletePic,
 	getPicList,
 	getPicById,
+	getPicByType,
 }

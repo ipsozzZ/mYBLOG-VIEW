@@ -12,13 +12,12 @@
                     <img src="../assets/img/person.jpg" class="img-circle img-responsive" />
                 </div>
                 <div class="col-md-5 text-center">
-                    <h1><strong>ipso </strong></h1>
+                    <h1><strong>{{ config.host }} </strong></h1>
                     <h4>大学生 & 爱折腾</h4>
                 </div>
                 <div class="col-md-5">
                     <h3>WHO M I :</h3>
-                    生命的终点不是死亡，是遗忘！
-										生命的终点不是死亡，是遗忘！生命的终点不是死亡，是遗忘！生命的终点不是死亡，是遗忘！生命的终点不是死亡，是遗忘！
+                    {{ config.desc }}
                 </div>
             </div>
         </div>
@@ -45,7 +44,34 @@
 
 <script>
 	export default{
-		name: 'header'
+		name: 'Header',
+		data(){
+		return {
+			configId: 1,
+			config: [],
+			friends: [],
+		}
+	},
+	created() {
+		this.getConfigId()
+	},
+	methods: {
+		getConfig(Id){
+			this.$api.getConfigs(Id).then( res => {
+				if(res.data.ret == 200 && res.data.data.code == 1){
+					this.config = res.data.data.data
+				}
+			})
+		},
+		getConfigId(){
+			this.$api.getConfigId().then( res => {
+				if(res.data.ret == 200 && res.data.data.code == 1){
+					this.configId = parseInt(res.data.data.data)
+					this.getConfig(this.configId)
+				}
+			})
+		}
+	}
 	}
 </script>
 

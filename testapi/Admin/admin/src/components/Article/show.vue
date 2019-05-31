@@ -48,7 +48,7 @@
   						<p style="color: red">暂无文章封面，上传封面后即可发布文章</p>
 						</div>
 						<div v-else>
-  						<img :src="article.face" alt="">
+  						<img :src="article.face" width="100" alt="">
 						</div>
         </FormItem>
 				<FormItem label="文章内容">
@@ -140,6 +140,14 @@ export default {
 			let Id = this.article.id
 			this.$api.publishArticle(Id).then( res => {
 				console.log(res.data.data)
+				if(res.data.ret == 200 && res.data.data.code == 1){
+					this.$Message.success(res.data.data.msg)
+					this.toList()
+				}else if(res.data.ret == 200 && res.data.data.code ==0){
+					this.$Message.error(res.data.data.msg)
+				}else{
+					this.$Message.error('发布失败，请稍后重试')
+				}
 			})
 		}
 	},

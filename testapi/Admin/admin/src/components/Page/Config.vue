@@ -14,6 +14,9 @@
 				<FormItem label="邮箱" prop="email">
             <Input v-model="formValidate.email" placeholder="输入邮箱"></Input>
         </FormItem>
+				<FormItem label="证件" prop="certificates">
+            <Input v-model="formValidate.certificates" placeholder="输入证件"></Input>
+        </FormItem>
 				<FormItem label="站点地址" prop="address">
             <Input v-model="formValidate.address" placeholder="输入站点地址"></Input>
         </FormItem>
@@ -55,6 +58,7 @@
                   title: '',
 									host: '',
 									desc: '',
+									certificates: '',
                   email: '',
                   address: '',
 									state: false,

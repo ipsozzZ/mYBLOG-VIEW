@@ -1,12 +1,44 @@
 <template>
     <div class="Add">
 			<h2>编辑文章：</h2><br>
+			<div style="margin-left:1em">
+        <Button @click="value4 = true" type="primary">预览图片</Button>
+        <Drawer :closable="false" width="640" v-model="value4">
+            <p :style="pStyle">文章封面图：</p>
+            <div class="demo-drawer-profile">
+                <Row v-for="face in faces" v-bind:key="face.id">
+                    <Col span="12">
+                      <img :src="face.src" width="100" :alt="face.pic">
+                    </Col>
+                    <Col span="12" style="font-size:0.7em">
+                      图片地址： {{ face.pic }}
+                    </Col>
+                </Row>
+            </div>
+						<hr style="margin:1.5em">
+						<p :style="pStyle">文章内容图</p>
+						<div class="demo-drawer-profile">
+                <Row v-for="picture in pictures" v-bind:key="picture.id">
+                    <Col span="12">
+                      <img :src="picture.src" width="100" :alt="picture.pic">
+                    </Col>
+                    <Col span="12">
+                      图片地址：{{ picture.pic }}
+                    </Col>
+                </Row>
+            </div>
+        </Drawer>
+    	</div>
+			<br>
 			<Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
         <FormItem label="文章标题" prop="title">
             <Input v-model="formValidate.title" placeholder="输入文章标题"></Input>
         </FormItem>
         <FormItem label="作者" prop="author">
             <Input v-model="formValidate.author" disabled placeholder="输入作者"></Input>
+        </FormItem>
+				<FormItem label="封面" prop="face">
+            <Input v-model="formValidate.face" placeholder="输入文章封面"></Input>
         </FormItem>
 				<FormItem label="关键字" prop="keywords">
             <Input v-model="formValidate.keywords" placeholder="输入关键字"></Input>
@@ -67,9 +99,21 @@
 					this.currId = this.$route.params.id
 					this.getArticle()
 					this.getCates()
+					this.getPic()
+					this.getFace()
 				},
         data () {
             return {
+								value4: false,
+                pStyle: {
+                    fontSize: '16px',
+                    color: 'rgba(0,0,0,0.85)',
+                    lineHeight: '24px',
+                    display: 'block',
+                    marginBottom: '16px'
+                },
+								pictures: [],
+								faces: [],
 								cate: [],
                 formValidate: {
                   title: '',
@@ -102,10 +146,8 @@
             handleSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-											console.log(this.formValidate)
 											let that = this
 											that.$api.updateArticle(that.formValidate).then( res => {
-												console.log(res)
 												if(res.data.ret != 200){
 													that.$Message.error('添加失败！');
 												}else{
@@ -155,6 +197,26 @@
 								}
 							})
 						},
+						getPic(){
+						this.$api.getPicByType(3).then( res => {
+							if(res.data.ret == 200 && res.data.data.code == 1){
+								this.pictures = res.data.data.data
+							}
+							else{
+								this.pictures = []
+							}
+						})
+					},
+					getFace(){
+						this.$api.getPicByType(2).then( res => {
+							if(res.data.ret == 200 && res.data.data.code == 1){
+								this.faces = res.data.data.data
+							}
+							else{
+								this.faces = []
+							}
+						})
+					},
         }
     }
 </script>
@@ -176,5 +238,12 @@
 	border: 1px solid;
 	border-color: #D4D4D4;
 	border-radius: 5px;
+}
+
+.demo-drawer-profile{
+	font-size: 14px;
+}
+.demo-drawer-profile .ivu-col{
+  margin-bottom: 12px;
 }
 </style>
