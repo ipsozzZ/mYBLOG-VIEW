@@ -11,8 +11,23 @@
 				<FormItem label="站点描述" prop="desc">
             <Input v-model="formValidate.desc" placeholder="输入站点描述"></Input>
         </FormItem>
+				<FormItem label="站长介绍" prop="about">
+            <Input v-model="formValidate.about" placeholder="输入站长介绍"></Input>
+        </FormItem>
 				<FormItem label="邮箱" prop="email">
             <Input v-model="formValidate.email" placeholder="输入邮箱"></Input>
+        </FormItem>
+				<FormItem label="QQ" prop="qq">
+            <Input v-model="formValidate.qq" placeholder="输入QQ"></Input>
+        </FormItem>
+				<FormItem label="职业" prop="work">
+            <Input v-model="formValidate.work" placeholder="输入职业"></Input>
+        </FormItem>
+				<FormItem label="爱好" prop="hobby">
+            <Input v-model="formValidate.hobby" placeholder="输入爱好"></Input>
+        </FormItem>
+				<FormItem label="电话" prop="phone">
+            <Input v-model="formValidate.phone" placeholder="输入电话"></Input>
         </FormItem>
 				<FormItem label="证件" prop="certificates">
             <Input v-model="formValidate.certificates" placeholder="输入证件"></Input>
@@ -58,11 +73,16 @@
                   title: '',
 									host: '',
 									desc: '',
+									qq: '',
+									phone: '',
 									certificates: '',
                   email: '',
                   address: '',
 									state: false,
 									info: '',
+									about: '',
+									work: '',
+									hobby: '',
                 },
                 ruleValidate: {
                     title: [

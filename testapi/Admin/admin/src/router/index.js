@@ -16,7 +16,7 @@ let router = new Router({
 
   routes: [
     {
-      path: '/Admin',
+      path: '/',
 			redirect: '/login',
 		},
 		{
@@ -26,6 +26,7 @@ let router = new Router({
 		{
 			path: "/index",
 			component: resolve => require(["../components/index.vue"],resolve),
+			redirect: '/HomeCard',
 			meta: {
 				requireAuth: true
 			},

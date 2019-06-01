@@ -5,36 +5,38 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld
-		// },
-		// {
-		// 	path: '/',
-		// 	name: 'Register',
-		// 	component: Register
-		// },
-
 		{
 			path: '/',
-			redirect: '/home',
+			redirect: '/index',
 		},
-		{
-			path: '/home',
-			name: 'Home',
-			component: resolve => require(['../components/home.vue'], resolve)
-		},
+		// {
+		// 	path: '/home',
+		// 	name: 'Home',
+		// 	component: resolve => require(['../components/home.vue'], resolve)
+		// },
 		{
 			path: '/index',
 			name: 'Index',
-			component: resolve => require(['../Page/index.vue'], resolve)
+			component: resolve => require(['../Page/index.vue'], resolve),
+			redirect: '/Article/list',
+			children:[
+				{
+					path: "/Article/list",
+					component: resolve => require(['../Page/articleList.vue'], resolve),
+				},
+				{
+					path: "/About",
+					component: resolve => require(['../Page/about.vue'], resolve),
+				},
+				{
+					path: "/AddFriend",
+					component: resolve => require(['../Page/addFriend.vue'], resolve),
+				},
+				{
+					path: "/User/aplay",
+					component: resolve => require(['../user/add.vue'], resolve),
+				},
+			]
 		},
-
-		// {
-		// 	path: '/Page/index',
-		// 	name: 'Home',
-		// 	component: Home
-		// }
   ]
 })

@@ -107,8 +107,7 @@ body{
 								<!-- content -->
         				<Content :style="{padding: '24px', minHeight: '480px', background: '#fff'}">
             			<transition name="move" mode="out-in">
-										<router-view>
-										</router-view>
+										<router-view></router-view>
 									</transition>
         				</Content>
 								<!-- end -->

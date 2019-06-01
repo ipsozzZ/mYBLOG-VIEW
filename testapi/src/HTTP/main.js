@@ -26,23 +26,16 @@ axios.defaults.transformRequest = [function (data) {
  * @param { 用户密码 } pass
  */
 function Login(user,pass){
-	let url = HOST_ROOT + '/?s=User.Login';
-	return axios.get(url, {
-		params:{
+	let url = HOST_ROOT + '/?s=User.login';
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
 			name: user,
 			pass: pass,
 		}
 	})
 } 
-
-/**
- * 用户注册
- * @param { 用户注册信息 } data
- */
-function Register(data){ 
-	let url = HOST_ROOT + '/?s=User.add'
-	return axios.post(url, data) 
-}
 
 /**
  * 通过用户id获取用户信息
@@ -76,6 +69,20 @@ function getUserByName(Name){
 	})
 }
 
+/**
+ * 用户注册
+ * @param {*} data 用户信息
+ * @returns
+ */
+function addUser(data){
+	let url = HOST_ROOT + '/?s=User.add'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data
+	})
+}
+
 /* ------------------  用户end  -------------------- */
 
 /* ------------------  用户begin  -------------------- */
@@ -85,7 +92,7 @@ function getUserByName(Name){
  * @returns
  */
 function getFriends(){
-	let url = HOST_ROOT + '/?s=Friendlink.getList'
+	let url = HOST_ROOT + '/?s=Friendlink.getFriends'
 	return axios({
 		method: 'get',
 		url: url,
@@ -226,13 +233,13 @@ function addComment(data){
 /* 暴露方法 */
 export default {  
 	Login,
-	Register,
 	getFriends,
 	aplayFriend,
 	getConfigs,
 	getConfigId,
 	getUser,
 	getUserByName,
+	addUser,
 	getCates,
 	countArticle,
 	getArticles,

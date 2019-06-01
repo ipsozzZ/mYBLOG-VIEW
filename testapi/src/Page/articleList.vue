@@ -35,8 +35,8 @@
                 	<span class="label label-success">{{ article.author }}</span>
                 	<span class="label label-primary" style="background-color: #515151;">
 										{{ article.like }}
-										<Icon v-if="article.islike == true" type="ios-heart-outline" class="hand" @click="addLike(article.id)" size="20" />
-										<Icon v-else type="ios-heart" class="hand" @click="addLike(article.id)" size="20"  />
+										<Icon  type="ios-heart-outline" size="20" />
+										<!-- <Icon v-else type="ios-heart" class="hand" @click="addLike(article.id)" size="20"  /> -->
 									</span>
                 	<span class="label label-info">
               			{{ article.comments }}
@@ -51,62 +51,40 @@
               <Page :total="pageCount" show-total :page-size="num" :current="currpage" @on-change="handlePage" />
             </nav>
              <!--PAGING  END -->
-        </div>
-        <div class="col-md-3">
-					<ul class="list-group">
-        		<li class="list-group-item">
-   						<strong>Main Categories</strong>
-  					</li>
+        	</div>
+        	<div class="col-md-3">
+						<ul class="list-group">
+        			<li class="list-group-item">
+   							<strong>Main Categories</strong>
+  						</li>
 
-						<li @click="getCount()" class="list-group-item">
-  					  <span class="badge">{{ this.All }}</span>
-  					  <a href="javascript:;"  >ALL</a> 
-  					</li>
+							<li @click="getCount()" class="list-group-item">
+  					  	<span class="badge">{{ this.All }}</span>
+  					  	<a href="javascript:;"  >ALL</a> 
+  						</li>
 
-  					<li v-for="cate in cates" v-bind:key="cate.id" @click="getCount(cate)" class="list-group-item">
-  					  <span class="badge">{{ cate.count }}</span>
-  					  <a href="javascript:;"  >{{ cate.name }}</a> 
-  					</li>
-					</ul>
+  						<li v-for="cate in cates" v-bind:key="cate.id" @click="getCount(cate)" class="list-group-item">
+  					  	<span class="badge">{{ cate.count }}</span>
+  					  	<a href="javascript:;"  >{{ cate.name }}</a> 
+  						</li>
+						</ul>
 
-        	<ul class="list-group">
-          	<li class="list-group-item">Advrtisements
-            </li>
-            <li class="list-group-item">
-              <a href="javascript:;">
-                <img src="../assets/img/ad1.jpg" class="img-responsive" />
-              </a>
-              <br />
-            	<a href="javascript:;">
-                <img src="../assets/img/ad2.jpg" class="img-responsive" />
-              </a>
-            </li>
-          </ul>
+        		<mySidebar></mySidebar>
 
-          <br />
-          <div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Subscribe For Updates</h3>
-              </div>
-              <div class="panel-body">
-                <input type="text" class="form-control" placeholder="Your Email" />
-                  <hr />
-                  <a href="javascript:;" class="btn btn-info btn-sm btn-block">subscribe</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
+        	</div>
+      	</div>
+    	</div>
     </section>
   </div>
 </template>
 
 <script>
+import mySidebar from '../Page/sidebar'
 export default {
-  name: 'ArticleList',
+	name: 'ArticleList',
+	components: {
+		mySidebar
+	},
   data(){
   	return {
 			All: 0,
@@ -163,7 +141,6 @@ export default {
 		},
 		getArticle(page, num, cate = 0){
 			this.$api.getArticles(page, num, cate).then( res => {
-				console.log(res.data.data)
 				if(res.data.ret == 200 && res.data.data.code == 1){
 					this.articles = res.data.data.data
 				}else{
@@ -176,15 +153,13 @@ export default {
 			this.getArticle(this.currpage, this.num, this.currCate)
 		},
 		addLike(index){
-			console.log()
-			if(!this.$commonjs.getCache(this.isLike)){
-				this.like = true
+			if(!this.$commonjs.getCache(this.isLike + index)){
+				this.like = false
 			}else{
 				this.addLike(index).then( res => {
-					console.log(res)
 					if(res.data.ret == 200 && res.data.data.code == 1){
 						this.like = true
-						this.$commonjs.setCache(this.isLike, 1)
+						this.$commonjs.setCache(this.isLike + index, index)
 						this.$Message.success(res.data.data.msg)
 						this.getArticle(this.currpage, this.num, this.currCate)
 					}else{

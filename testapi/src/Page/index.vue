@@ -6,19 +6,19 @@
 <template>
     <div class="Index">
 			<myHeader></myHeader>
-			<Article></Article>
+			<router-view></router-view>
 			<hr />
     	<div class="container">
         <div class="row">
           <div class="col-md-6 text-center set-foot">
             <h5 class="col-md-6">友情链接：</h5>
 						<div>
-							<div v-for="friend in friends" v-bind:key="friend.id" class="col-md-12">
+							<div v-for="friend in friends" v-bind:key="friend.id" class="col-md-12" style="margin:0.2em">
 								<span>{{ friend.remarks }}: </span>
 								<a :href="friend.address">{{ friend.name }}</a>
 							</div>
-							<div class="col-md-12">
-								<Button><router-link to="#">申请友链</router-link></Button>
+							<div class="col-md-12" style="margin:0.2em">
+								<Button size="small"><router-link to="/AddFriend">申请友链</router-link></Button>
 							</div>
 						</div>
           </div>
@@ -30,11 +30,13 @@
 <script>
 import Article from '../Page/articleList'
 import myHeader from '../Page/header'
+import mySidebar from '../Page/sidebar'
 export default {
 	name: 'Index',
 	components: {
 		Article,
-		myHeader
+		myHeader,
+		mySidebar
 	},
 	data(){
 		return {

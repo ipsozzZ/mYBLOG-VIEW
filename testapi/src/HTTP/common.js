@@ -58,7 +58,7 @@ function getCache(key, type = myType) {
 }
 
 /**
- * 
+ * 清除缓存
  * @param { 缓存类型，localStorage/sessionStorage } type
  * @param { 缓存key值 } key 
  */

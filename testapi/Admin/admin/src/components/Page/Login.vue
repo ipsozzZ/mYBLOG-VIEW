@@ -103,11 +103,11 @@
 											that.$Message.success("登陆成功！")
                       that.$router.push('/index')
 										}else{
-											that.$message.error("登录失败, 用户名或密码错误")
+											that.$Message.error("登录失败, 用户名或密码错误")
 										}
 									})		
                 } else {
-										that.$message.error("登录失败")
+										that.$Message.error("登录失败")
 										return false
                 }
               })

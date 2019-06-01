@@ -16,7 +16,7 @@
                     <h4>大学生 & 爱折腾</h4>
                 </div>
                 <div class="col-md-5">
-                    <h3>WHO M I :</h3>
+                    <h3>My World :</h3>
                     {{ config.desc }}
                 </div>
             </div>
@@ -28,11 +28,13 @@
           <div class="col-md-2 spon-txt">
             <span>My Space: </span>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-8">
+						<router-link to="/index"><Icon type="md-home" style="color: #636363" size="38" /></router-link>
           	<a target="_blank" href="https://github.com/ipsozzZ"><img src="../../src/assets/images/github.png"></a>
 						<a target="_blank" href="https://weibo.com/6144279237/profile?topnav=1&wvr=6&is_all=1"><img src="../../src/assets/images/weibo.png"></a>
 						<a target="_blank" href="https://www.zhihu.com/people/pso318-25/activities"><img src="../../src/assets/images/zhihu.png"></a>
 						<a target="_blank" href="https://space.bilibili.com/261231853/"><img src="../../src/assets/images/bili.png"></a>
+						<router-link to="/About" style="color: #636363"><Icon type="ios-person" size="38" /></router-link>
           </div>
         </div>
       </div>
