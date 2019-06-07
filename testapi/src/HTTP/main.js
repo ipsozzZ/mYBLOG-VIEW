@@ -161,6 +161,22 @@ function getCates(){
 	})
 }
 
+/**
+ * 通过id获取栏目信息
+ * @param {Number} Id 栏目id
+ * @returns
+ */
+function getCateById(Id){
+	let url = HOST_ROOT + '/?s=Category.getById'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id,
+		}
+	})
+}
+
 /* ------------------  栏目end  -------------------- */
 
 /* ------------------  文章begin  -------------------- */
@@ -209,11 +225,27 @@ function getArticles(page = 1, num = 10, cate = 0){
 }
 
 /**
- * 增加文章like
- * @param {*} Id 文章id
+ * 通过id获取文章详情
+ * @param {Number} Id 文章id
  * @returns
  */
-function addLike(Id){
+function getArtById(Id){
+	let url = HOST_ROOT + '/?s=Article.getById'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id,
+		}
+	})
+}
+
+/**
+ * 增加文章like
+ * @param {Number} Id 文章id
+ * @returns
+ */
+function addArtLike(Id){
 	let url = HOST_ROOT + '/?s=Article.addLike'
 	return axios({
 		method: 'post',
@@ -224,11 +256,73 @@ function addLike(Id){
 	})
 }
 
-function addComment(data){
+/**
+ * 增加文章Comment
+ * @param {Number} Id 文章id
+ * @returns
+ */
+function addArtComment(Id){
 	let url = HOST_ROOT + '/?s=Article.addComment'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			id: Id,
+		}
+	})
 }
 
 /* ------------------  文章end  -------------------- */
+
+/* ------------------  评论begin  -------------------- */
+
+/**
+ * 添加一条评论
+ * @param {Array} data 评论信息
+ * @returns
+ */
+function addComment(data){
+	let url = HOST_ROOT + '/?s=Comment.add'
+	return axios({
+		method: 'post',
+		url: url,
+		data: data
+	})
+}
+
+/**
+ * 获取文章所有评论
+ * @param {Number} aid 文章id
+ * @returns
+ */
+function getComments(aid){
+	let url = HOST_ROOT + '/?s=Comment.getAllByArt'
+	return axios({
+		method: 'post',
+		url: url,
+		data:{
+			aid: aid
+		}
+	})
+}
+
+/**
+ * 获取文章默认显示的评论列表
+ * @param {Number} aid 文章id
+ * @returns
+ */
+function getDefaultComment(aid){
+	let url = HOST_ROOT + '/?s=Comment.getDefaultByArt'
+	return axios({
+		method: 'post',
+		url: url,
+		data: {
+			aid: aid
+		}
+	})
+}
+
+/* ------------------  评论end  -------------------- */
  
 /* 暴露方法 */
 export default {  
@@ -241,7 +335,13 @@ export default {
 	getUserByName,
 	addUser,
 	getCates,
+	getCateById,
 	countArticle,
 	getArticles,
-	addLike,
+	addArtLike,
+	addArtComment,
+	getArtById,
+	addComment,
+	getComments,
+	getDefaultComment,
 }

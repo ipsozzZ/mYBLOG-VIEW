@@ -8,7 +8,7 @@
   height: auto;
 }
 .hand:hover{
-	cursor:pointer
+	cursor:pointer;
 }
 </style>
 
@@ -26,12 +26,12 @@
           	<hr />
         		<a href="javascript:;" @click="Login" class="btn btn-info btn-sm btn-block">进入</a>
 						<a href="javascript:;" @click="toAdd" class="btn btn-info btn-sm btn-block">新客移步</a>
-					</div>
+					</div> 
 					<div v-else>
 						<Icon type="ios-person" size="25" />
 						{{ user }}
           	<hr />
-        		<a href="javascript:;" @click="toUserInfo(user)" class="btn btn-info btn-sm btn-block">into center</a>
+        		<!-- <a href="javascript:;" @click="toUserInfo(user)" class="btn btn-info btn-sm btn-block">into center</a> -->
 						<a href="javascript:;" @click="Logout" class="btn btn-info btn-sm btn-block">退出客厅</a>
 					</div>
       	</div>
@@ -78,13 +78,13 @@ export default {
 		},
 		Login(){
 			this.$api.Login(this.user, this.pass).then( res => {
-				console.log(res)
 				if(res.data.ret == 200 && res.data.data.code == 1){
 					this.$commonjs.setCache('u_id', res.data.data.data.id)
 					this.$commonjs.setCache('u_name', res.data.data.data.name)
 					this.user = res.data.data.data.name
 					this.isLogin = true
 					this.$Message.success('成功!');
+					this.$commonjs.setCache('a_like', false)
 				}else if(res.data.ret == 200 && res.data.data.code == 0){
 					this.isLogin = false
 					this.$Message.error(res.data.data.msg);
@@ -100,6 +100,9 @@ export default {
 			this.isLogin = false
 			this.$Message.success('成功，欢迎下次光临!');
 			this.$router.push('/index')
+			this.user = ''
+			this.pass = ''
+			this.$commonjs.setCache('a_like', false)
 		},
 		toUserInfo(user){
 			console.log(user)

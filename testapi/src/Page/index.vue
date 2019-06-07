@@ -9,23 +9,16 @@
 			<router-view></router-view>
 			<hr />
     	<div class="container">
-        <div class="row">
-          <div class="col-md-6 text-center set-foot">
-            <h5 class="col-md-6">友情链接：</h5>
-						<div>
-							<div v-for="friend in friends" v-bind:key="friend.id" class="col-md-12" style="margin:0.2em">
-								<span>{{ friend.remarks }}: </span>
-								<a :href="friend.address">{{ friend.name }}</a>
-							</div>
-							<div class="col-md-12" style="margin:0.2em">
-								<Button size="small"><router-link to="/AddFriend">申请友链</router-link></Button>
-							</div>
-						</div>
-          </div>
-        </div>
-				<p class="col-md-6" style="padding: 0.5em 0;"><i>备案号：</i> <i>{{ config.certificates }}</i></p>
+        <div class="col-md-9 text-center set-foot">
+					<div>
+						<span><i>友情链接：</i></span>
+						<a v-for="friend in friends" v-bind:key="friend.id" :href="friend.address" style="margin:0.2em">{{ friend.name }}</a>
+					</div>
+					<Button size="small"><router-link to="/AddFriend">申请友链</router-link></Button>
+					<p style="padding: 0.5em 0;"><i>{{ config.certificates }}</i></p>
+    		</div>
     	</div>
-		</div>
+  	</div>
 </template>
 <script>
 import Article from '../Page/articleList'

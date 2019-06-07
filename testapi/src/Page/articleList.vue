@@ -32,7 +32,7 @@
                   {{ article.desc }}
 								<div class="blog-info">
                 	<span class="label label-primary">{{ article.ctime }}</span>
-                	<span class="label label-success">{{ article.author }}</span>
+                	<span class="label label-success">By {{ article.author }}</span>
                 	<span class="label label-primary" style="background-color: #515151;">
 										{{ article.like }}
 										<Icon  type="ios-heart-outline" size="20" />
@@ -112,6 +112,7 @@ export default {
 			this.$api.getCates().then( res => {
 				if(res.data.ret == 200 && res.data.data.code == 1){
 					this.cates = res.data.data.data
+					console.log(res.data.data.data)
 				}else{
 					this.cates = []
 				}
@@ -168,6 +169,9 @@ export default {
 					}
 				})
 			}
+		},
+		show(index){
+			this.$router.push('/Article/show/' + index)
 		}
 	}
 }

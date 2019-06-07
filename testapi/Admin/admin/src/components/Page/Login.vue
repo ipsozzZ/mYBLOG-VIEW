@@ -5,13 +5,19 @@
 	margin: 0 auto;
 	margin-top: 10%;
 	background-color: blanchedalmond;
-	padding: 50px;
+	padding: 40px;
+}
+.Login h1{
+	width: 100%;
+	text-align: center;
+	margin: 0 0 1em 0;
 }
 </style>
 
 <template>
     <div class="Login">
-			<Form ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="100">
+			<h1>ipso个人博客后台管理系统</h1>
+			<Form ref="formCustom" :model="formCustom" :rules="ruleCustom" style="padding-right: 60px;" :label-width="100">
         <FormItem label="用户名" prop="username">
             <Input type="text" v-model="formCustom.username"></Input>
         </FormItem>

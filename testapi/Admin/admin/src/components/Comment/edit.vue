@@ -20,8 +20,11 @@ Form{
 				<FormItem label="父评论编号" prop="parentid">
           <Input type="text" disabled v-model="formCustom.parentid"></Input>
         </FormItem>
-				<FormItem label="IP" prop="ip">
-          <Input type="text" disabled v-model="formCustom.ip"></Input>
+				<FormItem label="评论数" prop="comment">
+          <Input type="text" disabled v-model="formCustom.comment"></Input>
+        </FormItem>
+				<FormItem label="点赞数" prop="like">
+          <Input type="text" disabled v-model="formCustom.like"></Input>
         </FormItem>
 				<FormItem label="内容" prop="content">
           <Input v-model="formCustom.content" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="说点什么吧……"></Input>
@@ -48,9 +51,10 @@ export default {
         formCustom: {
 					id: 0,
 					uid: 0,
-					ip: '',
 					aid: 0,
 					parentid: 0,
+					comment: 0,
+					like: 0,
 					content: '',
         },
       	ruleCustom: {
@@ -65,7 +69,6 @@ export default {
         this.$refs[value].validate((valid) => {
           if (valid) {
 						this.$api.editComment(this.formCustom).then(res => {
-							console.log(res)
 							if(res.data.ret == 200){
 								if(res.data.data.code == 0){
 									this.$Message.error(res.data.data.msg);

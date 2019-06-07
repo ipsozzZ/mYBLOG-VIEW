@@ -25,6 +25,10 @@ export default new Router({
 					component: resolve => require(['../Page/articleList.vue'], resolve),
 				},
 				{
+					path: "/Article/show/:id",
+					component: resolve => require(['../Page/show.vue'], resolve),
+				},
+				{
 					path: "/About",
 					component: resolve => require(['../Page/about.vue'], resolve),
 				},

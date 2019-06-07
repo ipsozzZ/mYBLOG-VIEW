@@ -9,10 +9,10 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/admin/',
     proxyTable: {
 			'/api': {
-				target: "http://www.ipso.me:8080",
+				target: "http://api.ipso.live",
 				changeOrigin: true,
 				pathRewrite: {
 					'^/api': ''
@@ -51,7 +51,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/admin/',
 
     /**
      * Source Maps

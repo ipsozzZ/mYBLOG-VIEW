@@ -51,8 +51,12 @@ export default {
 					key: 'parentid',
 				},
 				{
-          title: 'ip',
-					key: 'ip',
+          title: '评论数',
+					key: 'comment',
+				},
+				{
+          title: '点赞',
+					key: 'like',
 				},
         {
           title: '操作',
@@ -113,7 +117,7 @@ export default {
         title: 'comment Info',
 				content: `ID: ${this.comment[index].id}<br>aid: ${this.comment[index].aid}
 				<br>uid: ${this.comment[index].uid}<br>parentid: ${this.comment[index].parentid}
-				<br>ip: ${this.comment[index].ip}<br>content: ${this.comment[index].content}`
+				<br>comment: ${this.comment[index].comment}<br>like: ${this.comment[index].like}<br>content: ${this.comment[index].content}`
       })
 		},
     remove (index) {

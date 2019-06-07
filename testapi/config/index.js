@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
 			'/api':{
-				target: "http://www.ipso.me:8080",
+				target: "http://api.ipso.live",
 				changeOrigin:true,
 				pathRewrite: {
 					'^/api': ''
