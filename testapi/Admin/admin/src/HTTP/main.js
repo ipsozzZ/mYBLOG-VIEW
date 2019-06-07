@@ -13,7 +13,7 @@ import common from './common'
 
 
 /* 需要跨域时将此处注释代码取消注释 */
-let HOST_ROOT = '/api'
+let HOST_ROOT = '../../api/public'
 
 axios.defaults.transformRequest = [function (data) {
 	let ret = ''
@@ -511,6 +511,18 @@ function getfriends(){
 }
 
 /**
+ * 获取所有可显示的友链
+ * @returns
+ */
+function getMyFriends(){
+	let url = HOST_ROOT + '/?s=Friendlink.getFriends'
+	return axios({
+		method: 'get',
+		url: url,
+	})
+}
+
+/**
  * 添加一条友情链接
  * @param { 友链信息 } data
  * @returns
@@ -852,9 +864,10 @@ export default {
 	editUser,
 	getUser,
 	addConfig,
-	getId,
+	getId, // 获取配置文件id
 	getConfig,
 	getfriends,
+	getMyFriends,
 	addFriend,
 	editFriend,
 	getFriend,

@@ -3,14 +3,15 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const assetsPublicPath = '/admin/'
 
 module.exports = {
   dev: {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/admin/',
-    proxyTable: {
+		assetsPublicPath: assetsPublicPath,
+    proxyTable: { // 跨域代理用
 			'/api': {
 				target: "http://api.ipso.live",
 				changeOrigin: true,
@@ -51,7 +52,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/admin/',
+		assetsPublicPath: assetsPublicPath,
 
     /**
      * Source Maps

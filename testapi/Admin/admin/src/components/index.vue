@@ -137,8 +137,17 @@ body{
 				vFooter,
 				vHeader,
 			},
-			// methods(){
-			// 	GetHome(){}
-			// },
+			methods: {
+				getConfigId(){
+					this.$api.getId().then( res => {
+						console.log(res)
+					})
+				},
+				getConfig(Id){
+					this.$api.getConfig(Id).then( res => {
+						console.log(res)
+					})
+				}
+			}
     }
 </script>

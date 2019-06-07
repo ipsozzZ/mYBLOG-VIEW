@@ -1,14 +1,34 @@
 <style scoped>
 .layout-logo{
-    width: 100px;
-    height: 30px;
+    width: 350px;
+    height: 40px;
     background: #5b6270;
     border-radius: 3px;
     float: left;
-    position: relative;
+    /* position: relative;
     top: 15px;
-    left: 20px;
+    left: 20px; */
+		margin-top: 15px;
+		margin-left: -30px;
+		display: flex;
+		justify-items: center;
+		align-items: center;
 }
+.layout-logo img{
+	width: 40px;
+  height: 40px;
+	border-radius: 100%;
+	margin-left: 1em;
+}
+
+.layout-logo span{
+	position: relative;
+	margin-left: 1em;
+	color: #7EC0EE;
+  
+}
+
+
 .layout-nav{
     width: 420px;
     margin: 0 auto;
@@ -21,12 +41,15 @@
 <div>
 	<Header>
     <Menu mode="horizontal" theme="dark" active-name="1">
-        <div class="layout-logo"><img src="../assets/logo.png" width="30px"></div>
+        <div class="layout-logo">
+					<img src="../assets/person.jpg" width="30px">
+					<span style="font-size:2em;font-weight: 900;">ipso后台管理系统</span>
+				</div>
         <div class="layout-nav">
           <MenuItem name="2">
-            <Icon type="ios-keypad"></Icon>
+						<Icon type="ios-home" />
             <!-- Item 2 -->
-						<a href="/front/index" style="color: #F7F7F7">ipso</a>
+						<a href="http://www.ipso.live" target="_black" style="color: #F7F7F7">ipso</a>
           </MenuItem>
         </div>
 				<Submenu name="1">
