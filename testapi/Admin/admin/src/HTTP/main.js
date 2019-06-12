@@ -8,12 +8,11 @@ import axios from 'axios'
 import common from './common'
 
 /* 无需跨域时将此处注释代码取消注释 */
-// let URL = 'http://www.host.com'
-// let HOST_ROOT = URL
+// let HOST_ROOT = '把我修改为打包后index.html与api程序根目录的相对地址'
 
-
-/* 需要跨域时将此处注释代码取消注释 */
-let HOST_ROOT = '../../api/public'
+// 使用代理跨域 在config目录下的index.js里配置proxyTable跨域
+/* 不需要跨域时将此处代码注释 */
+let HOST_ROOT = '/api'
 
 axios.defaults.transformRequest = [function (data) {
 	let ret = ''
@@ -725,7 +724,7 @@ function UploadImg(file){
  */
 function getPicCount(type){
 	let url = HOST_ROOT + '/?s=Picture.getCount'
-	if(type == null){
+	if(type === null){
 		return axios({
 			method: 'post',
 			url: url,
@@ -808,7 +807,7 @@ function deletePic(Id){
  * @returns
  */
 function getPicByType(type){
-	let url = HOST_ROOT + '/?s=Picture.getByType'
+	let url = HOST_ROOT + '/?s=Picture.getNewByType'
 	return axios({
 		method: 'post',
 		url: url,

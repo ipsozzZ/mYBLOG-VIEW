@@ -104,9 +104,6 @@ export default {
 			this.pass = ''
 			this.$commonjs.setCache('a_like', false)
 		},
-		toUserInfo(user){
-			console.log(user)
-		}
 	}
 }
 </script>

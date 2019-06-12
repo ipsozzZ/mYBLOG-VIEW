@@ -36,7 +36,7 @@
 export default {
 	name: "List",
 	created() {
-		this.getCount()
+		this.getCount(this.type)
 		this.getPics(this.currpage, this.num)
 	},
   data () {
@@ -112,7 +112,6 @@ export default {
   },
   methods: {
     show (index) {
-			console.log(index)
 			this.$router.push('/Picture/show/' + index)
 		},
 		jage(){
@@ -120,7 +119,9 @@ export default {
 			return false;
 		},
 		getType(){
-			this.getCount()
+			// console.log(this.type)
+			this.getCount(this.type)
+			// console.log(this.type)
 			this.getPics(this.currpage, this.num)
 		},
     remove (index) {
@@ -159,10 +160,16 @@ export default {
 			this.currpage = value
       this.getPics(this.currpage, this.num)
 		},
-		getCount(){
-			this.$api.getPicCount(this.type).then( res => {
+		getCount(type){
+			if(type !== null){
+				type = parseInt(type)
+			}else{
+				type = null
+			}
+			this.$api.getPicCount(type).then( res => {
 				if(res.data.ret == 200 && res.data.data.code == 1){
 					this.pageCount = parseInt(res.data.data.data)
+					console.log(this.pageCount)
 				}
 			})
 		}

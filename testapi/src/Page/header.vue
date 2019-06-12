@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-5 text-center">
                     <h1><strong>{{ config.host }} </strong></h1>
-                    <h4>大学生 & 爱折腾</h4>
+                    <h4>{{ config.title }}</h4>
                 </div>
                 <div class="col-md-5">
                     <h3>My World :</h3>

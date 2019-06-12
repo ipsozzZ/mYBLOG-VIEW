@@ -73,7 +73,6 @@ Form{
                 this.$refs[name].validate((valid) => {
                     if (valid) {
 											this.$api.editAdmin(this.formCustom).then(res => {
-												console.log(res)
 												if(res.data.data.code == 0){
 													this.$Message.error(res.data.data.msg);
 												}else{

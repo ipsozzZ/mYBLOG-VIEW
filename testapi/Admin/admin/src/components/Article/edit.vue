@@ -37,8 +37,8 @@
         <FormItem label="作者" prop="author">
             <Input v-model="formValidate.author" disabled placeholder="输入作者"></Input>
         </FormItem>
-				<FormItem label="封面" prop="face">
-            <Input v-model="formValidate.face" placeholder="输入文章封面"></Input>
+				<FormItem label="封面" prop="src">
+            <Input v-model="formValidate.src" placeholder="输入文章封面"></Input>
         </FormItem>
 				<FormItem label="关键字" prop="keywords">
             <Input v-model="formValidate.keywords" placeholder="输入关键字"></Input>
@@ -124,7 +124,7 @@
                   istop: '',
 									like: 0,
 									comments: 0,
-									face: '',
+									src: '',
 									state: 0,
                   content: ''
                 },

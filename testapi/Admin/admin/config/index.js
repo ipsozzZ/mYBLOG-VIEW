@@ -13,7 +13,7 @@ module.exports = {
 		assetsPublicPath: assetsPublicPath,
     proxyTable: { // 跨域代理用
 			'/api': {
-				target: "http://api.ipso.live",
+				target: "http://", // 代理服务器域名如本地测试则填：127.0.0.1 或者localhost
 				changeOrigin: true,
 				pathRewrite: {
 					'^/api': ''

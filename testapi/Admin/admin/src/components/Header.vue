@@ -14,9 +14,16 @@
 		justify-items: center;
 		align-items: center;
 }
-.layout-logo img{
+.layout-logo a{
 	width: 40px;
   height: 40px;
+	margin-left: 1em;
+}
+
+.layout-logo a img{
+	width: 40px;
+  height: 40px;
+	border: 1px solid;
 	border-radius: 100%;
 	margin-left: 1em;
 }
@@ -27,8 +34,6 @@
 	color: #7EC0EE;
   
 }
-
-
 .layout-nav{
     width: 420px;
     margin: 0 auto;
@@ -36,13 +41,12 @@
 }
 </style>
 
-
 <template>
 <div>
 	<Header>
     <Menu mode="horizontal" theme="dark" active-name="1">
         <div class="layout-logo">
-					<img src="../assets/person.jpg" width="30px">
+					<router-link to="/index"><img src="../assets/person.jpg" width="30px"></router-link>
 					<span style="font-size:2em;font-weight: 900;">ipso后台管理系统</span>
 				</div>
         <div class="layout-nav">

@@ -13,7 +13,7 @@
 </style>
 
 <template>
-  <div id="AddFriend">
+  <div id="AddFriend" v-title data-title="ipso-注册用户">
 		<section>
       <div class="container">
         <div class="row">

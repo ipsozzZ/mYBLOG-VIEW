@@ -3,7 +3,7 @@
 			<h2>添加文章：</h2><br>
 			<div style="margin-left:1em">
         <Button @click="value4 = true" type="primary">预览图片</Button>
-        <Drawer :closable="false" width="640" v-model="value4">
+        <Drawer :closable="false" width="800" v-model="value4">
             <p :style="pStyle">文章封面图：</p>
             <div class="demo-drawer-profile">
                 <Row v-for="face in faces" v-bind:key="face.id">
@@ -11,21 +11,22 @@
                       <img :src="face.src" width="100" :alt="face.pic">
                     </Col>
                     <Col span="12" style="font-size:0.7em">
-                      图片地址： {{ face.pic }}
+                      图片地址：<br/> {{ face.pic }}
                     </Col>
                 </Row>
             </div>
-						<hr style="margin:1.5em">
-						<p :style="pStyle">文章内容图</p>
-						<div class="demo-drawer-profile">
-                <Row v-for="picture in pictures" v-bind:key="picture.id">
+						<hr style="margin:1.5em -20px">
+						<p :style="pStyle">文章内容图:</p>
+						<div class="demo-drawer-profile" v-for="picture in pictures" v-bind:key="picture.id">
+                <Row>
                     <Col span="12">
-                      <img :src="picture.src" width="100" :alt="picture.pic">
+                      <img :src="picture.src" width="350" :alt="picture.pic">
                     </Col>
                     <Col span="12">
-                      图片地址：{{ picture.pic }}
+                      图片地址：<br>{{ picture.pic }}
                     </Col>
                 </Row>
+								<hr style="margin: 1em 10em;" />
             </div>
         </Drawer>
     	</div>
@@ -71,7 +72,7 @@
 						<div class="left" style="">
 							<markdown-editor v-model="formValidate.content" ref="markdownEditor"></markdown-editor>
 						</div>
-						<div class="right">
+						<div class="right content">
 							<p style="margin-left:1em;margin-top: 1em">文章展示</p><hr style="margin-top: 0.5em; margin-bottom:2em;">
 							<div style="margin-left: 0em; background-color: #FAFAFA"><markdown style="padding-left: 2em" :content="formValidate.content">{{ formValidate.content }}</markdown></div>
 						</div>

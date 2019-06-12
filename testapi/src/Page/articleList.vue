@@ -13,7 +13,7 @@
 </style>
 
 <template>
-  <div id="ArticleList">
+  <div id="ArticleList" data-title="ipso-文章列表">
 		<section>
       <div class="container">
         <div class="row">
@@ -112,7 +112,6 @@ export default {
 			this.$api.getCates().then( res => {
 				if(res.data.ret == 200 && res.data.data.code == 1){
 					this.cates = res.data.data.data
-					console.log(res.data.data.data)
 				}else{
 					this.cates = []
 				}

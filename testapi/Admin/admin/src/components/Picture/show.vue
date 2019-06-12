@@ -3,6 +3,7 @@
 		<h2>图片显示</h2>
 		<br>
 		<img :src="pic.src" style="width:500px; height:350px" alt=""><br>
+		<p>图片地址：{{ pic.pic }}</p>
 		<Button @click="toList()" style="margin-top:2em">返回列表</Button>
 	</div>
 </template>

@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
 			'/api':{
-				target: "http://api.ipso.live",
+				target: "http://", // 代理服务器域名
 				changeOrigin:true,
 				pathRewrite: {
 					'^/api': ''

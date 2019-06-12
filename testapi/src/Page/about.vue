@@ -13,7 +13,7 @@
 </style>
 
 <template>
-  <div id="About">
+  <div id="About" v-title data-title="ipso-About">
 		<section>
       <div class="container">
         <div class="row">

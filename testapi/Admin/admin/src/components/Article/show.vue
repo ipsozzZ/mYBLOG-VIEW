@@ -139,7 +139,6 @@ export default {
 		publish(){
 			let Id = this.article.id
 			this.$api.publishArticle(Id).then( res => {
-				console.log(res.data.data)
 				if(res.data.ret == 200 && res.data.data.code == 1){
 					this.$Message.success(res.data.data.msg)
 					this.toList()

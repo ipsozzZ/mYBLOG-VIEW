@@ -2,7 +2,7 @@
     <div class="Add">
 			<h2>站点配置：</h2><br>
 			<Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-        <FormItem label="站点名称" prop="title">
+        <FormItem label="站点副标题" prop="title">
             <Input v-model="formValidate.title" placeholder="站点名称"></Input>
         </FormItem>
         <FormItem label="站长" prop="host">

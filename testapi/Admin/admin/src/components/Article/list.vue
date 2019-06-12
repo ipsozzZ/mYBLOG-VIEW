@@ -131,7 +131,6 @@ export default {
 		},
 		getArticle(currpage,num){
 			this.$api.listArticle(currpage, num).then( res => {
-				console.log(res)
 				if(res.data.ret != 200){
 					this.$Message.success("获取数据失败！")
 				}else{

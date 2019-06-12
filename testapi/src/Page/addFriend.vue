@@ -13,7 +13,7 @@
 </style>
 
 <template>
-  <div id="AddFriend">
+  <div id="AddFriend" v-title data-title="ipso-申请友链">
 		<section>
       <div class="container">
         <div class="row">

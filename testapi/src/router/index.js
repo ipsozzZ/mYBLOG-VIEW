@@ -5,15 +5,11 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+		
 		{
 			path: '/',
 			redirect: '/index',
 		},
-		// {
-		// 	path: '/home',
-		// 	name: 'Home',
-		// 	component: resolve => require(['../components/home.vue'], resolve)
-		// },
 		{
 			path: '/index',
 			name: 'Index',
@@ -22,7 +18,7 @@ export default new Router({
 			children:[
 				{
 					path: "/Article/list",
-					component: resolve => require(['../Page/articleList.vue'], resolve),
+					component: resolve => require(['../Page/articleList.vue'], resolve),	
 				},
 				{
 					path: "/Article/show/:id",

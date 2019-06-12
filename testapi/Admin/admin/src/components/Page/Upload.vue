@@ -17,7 +17,7 @@
 </template>
 <script>
 export default {
-	name: '',
+	name: 'Upload',
   data () {
     return {
 			type: '',
@@ -35,7 +35,7 @@ export default {
         var result = document.getElementById("showpic"); 
         //显示文件 
         result.innerHTML='<img id="Pic" src="' + this.result +'" alt="" style="width:400px; height=300px" />'; 
-    	} 
+    	}
 		},
 		uploadImg(){
 			let file = this.file
