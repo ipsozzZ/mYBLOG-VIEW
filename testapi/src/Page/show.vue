@@ -144,7 +144,7 @@ export default {
 	created() {
 		this.currId = this.$route.params.id
 		this.getArticle(this.currId)
-		let flag = this.$commonjs.getCache('a_like')
+		let flag = this.$commonjs.getCache('a_like'+this.currId)
 		if(flag === 'true'){
 			this.isArtLike = true
 		}
@@ -174,17 +174,17 @@ export default {
 			})
 		},
 		addArtLike(index){
-			if(this.$commonjs.getCache('a_like') === 'true'){
+			if(this.$commonjs.getCache('a_like'+this.currId) === 'true'){
 				this.$Message.success('你已经给文章点过赞了呢，感谢支持!')
 				this.isArtLike = true
 			}else{
 				this.$api.addArtLike(index).then( res =>{
 					if(res.data.ret == 200 && res.data.data.code ==1){
-						this.$commonjs.setCache('a_like', true)
+						this.$commonjs.setCache('a_like'+this.currId, true)
 						this.isArtLike = true
 						this.getArticle(this.currId)
 					}else{
-						this.$commonjs.setCache('a_like', false)
+						this.$commonjs.setCache('a_like'+this.currId, false)
 						this.isArtLike = false
 					}
 				})

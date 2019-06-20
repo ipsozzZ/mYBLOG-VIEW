@@ -7,10 +7,10 @@ import axios from 'axios'
 
 // 使用代理跨域 在config目录下的index.js里配置proxyTable跨域
 /* 不需要跨域时将此处代码注释 */
-let HOST_ROOT = '/api'
+// let HOST_ROOT = '/api'
 
 /* 不夸域时将下面注释取消 */
-// let HOST_ROOT = '把我修改为打包后index.html与api程序根目录的相对地址'
+let HOST_ROOT = '/api/public'
 
 /* 设置axios为form-data */
 axios.defaults.transformRequest = [function (data) {
