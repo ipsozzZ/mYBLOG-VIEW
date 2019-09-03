@@ -106,6 +106,7 @@ export default {
 					this.$api.aplayFriend(this.formCustom).then( res => {
 						if(res.data.ret == 200 && res.data.data.code == 1){
 							this.$Message.success('申请成功，请等待博主处理!');
+							this.$router.push('/Article/list')
 						}
 						else if(res.data.ret == 200 && res.data.data.code == 0){
 							this.$Message.error(res.data.data.msg);

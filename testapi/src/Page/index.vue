@@ -11,7 +11,7 @@
     	<div class="container" style="font-weight:700;">
         <div class="text-center set-foot">
 					<div style="line-height: 0.8em;font-weight:700;">
-						<p><i>ipso的个人站点: <a href="http://www.gaogege.live" target="_black">ipso Site</a></i></p>
+						<p><i>ipso的个人站点: <a href="http://www.gaoge.online" target="_black">ipso Site</a></i></p>
 						<p><i>ipso的独立博客: <a :href="config.address" target="_black">ipso Blog</a></i></p>
 						<span><i>友情链接：</i></span>
 						<a v-for="friend in friends" v-bind:key="friend.id" :href="friend.address" target="_black" style="margin:0.2em">{{ friend.name }}</a>
