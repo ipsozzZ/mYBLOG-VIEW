@@ -27,7 +27,7 @@
     <div style="display:flex">
 			<div class="admin"><h3>管理员：</h3><a href="http://www.ipso.live">ipso</a></div>
 			<div>
-				<p><a href="http://www.gaogege.live" target="_black" rel="noopener noreferrer"><i>ipso的个人站点</i></a></p>
+				<p><a href="http://www.gqiming.wang" target="_black" rel="noopener noreferrer"><i>ipso的个人站点</i></a></p>
 				<p><a :href="config.address" target="_black" rel="noopener noreferrer"><i>ipso的独立博客</i></a></p>
 				<p class="Book"><i>友情链接：</i></p>
 				<div>
